@@ -217,8 +217,8 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
       const match = document.cookie.match(/(?:^|; )token=([^;]*)/);
       const token = match ? decodeURIComponent(match[1]) : '';
       
-      await axios.put(
-        'http://localhost:3003/v1/superadmin/user',
+      await axios.post(
+        'http://localhost:3003/v1/superadmin/addUser',
         payload,
         {
           headers: {
