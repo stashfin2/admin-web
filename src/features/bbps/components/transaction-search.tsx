@@ -3,12 +3,13 @@ import { IconCalendar, IconDownload } from '@tabler/icons-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
-  Select,
+  Select as UISelect,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import Select from 'react-select';
 import axios from 'axios'
 
 interface TransactionSearchProps {
@@ -17,7 +18,7 @@ interface TransactionSearchProps {
     bbpsReferenceCode: string
     start_date: string
     end_date: string
-    category: string
+    category: string[]
     customerId: string
     paymentStatus: string
   }) => void
@@ -28,21 +29,54 @@ export function TransactionSearch({
   onSearch,
   onReset,
 }: TransactionSearchProps) {
-  const [fields, setFields] = useState({
+  const [fields, setFields] = useState<{
+    id: string
+    bbpsReferenceCode: string
+    start_date: string
+    end_date: string
+    category: string[]
+    customerId: string
+    paymentStatus: string
+  }>({
     id: '',
     bbpsReferenceCode: '',
     start_date: '',
     end_date: '',
-    category: '',
+    category: [],
     customerId: '',
     paymentStatus: '',
   })
+
+  const [categoryOptions, setCategoryOptions] = useState<string[]>([]);
+  const [loadingCategories, setLoadingCategories] = useState(false);
 
   const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
   const getToken = () => {
     const match = document.cookie.match(/(?:^|; )auth_token=([^;]*)/)
     return match ? decodeURIComponent(match[1]) : ''
   }
+
+  //fetch categories when dropdown is opened
+  const fetchCategories = async () => {
+    setLoadingCategories(true);
+    try {
+      const token = getToken();
+      const response = await axios.get(
+        `${BACKEND_BASE_URL}/api`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+          withCredentials: true,
+        }
+      );
+      if (response.data?.data?.categories) {
+        setCategoryOptions(response.data.data.categories);
+      }
+    } catch (_error) {
+      setCategoryOptions([]);
+    } finally {
+      setLoadingCategories(false);
+    }
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -60,7 +94,7 @@ export function TransactionSearch({
       bbpsReferenceCode: '',
       start_date: '',
       end_date: '',
-      category: '',
+      category: [],
       customerId: '',
       paymentStatus: '',
     })
@@ -121,7 +155,7 @@ export function TransactionSearch({
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2'>
         <div>
           <label className='mb-1 block text-xs font-semibold'>
-           PG Transaction ID
+            PG Transaction ID
           </label>
           <Input
             name='id'
@@ -184,7 +218,7 @@ export function TransactionSearch({
         </div>
         <div>
           <label className='mb-1 block text-xs font-semibold'>Category</label>
-          <Select
+          {/* <Select
             value={fields.category}
             onValueChange={(value) => setFields({ ...fields, category: value })}
           >
@@ -199,15 +233,33 @@ export function TransactionSearch({
               <SelectItem value='Credit Card'>Credit Card</SelectItem>
               <SelectItem value='Fastag'>Fastag</SelectItem>
             </SelectContent>
-          </Select>
+          </Select> */}
+          <Select
+            isMulti
+            options={categoryOptions.map((c: string) => ({ label: c, value: c }))}
+            value={
+              Array.isArray(fields.category)
+                ? fields.category.map((c: string) => ({ label: c, value: c }))
+                : []
+            }
+            onChange={(selected) =>
+              setFields({
+                ...fields,
+                category: selected ? selected.map((s) => s.value) : [],
+              })
+            }
+            onMenuOpen={fetchCategories}
+            isLoading={loadingCategories}
+            placeholder="Select Category"
+          />
         </div>
         <div>
           <label className='mb-1 block text-xs font-semibold'>
             Payment Status
           </label>
-          <Select
+          <UISelect
             value={fields.paymentStatus}
-            onValueChange={(value) =>
+            onValueChange={(value: string) =>
               setFields({ ...fields, paymentStatus: value })
             }
           >
@@ -221,7 +273,7 @@ export function TransactionSearch({
                 Payment Processing Error
               </SelectItem>
             </SelectContent>
-          </Select>
+          </UISelect>
         </div>
       </div>
       {/* Buttons row */}

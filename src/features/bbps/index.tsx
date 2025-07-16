@@ -13,7 +13,7 @@ import { Separator } from '@/components/ui/separator'
 import { bbpsColumns } from './components/bbps-columns'
 import { BBPSTablePagination } from './components/bbps-table-pagination'
 
-// const BACKEND_BASE_URL = 'https://eqxstaging.stashfin.com/admin'
+ 
 const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL
 const getToken = () => {
   const match = document.cookie.match(/(?:^|; )auth_token=([^;]*)/)
@@ -24,7 +24,7 @@ interface TransactionSearchFields {
   id?: string
   bbpsReferenceCode?: string
   mobileNumber?: string
-  category?: string
+  category?: string[]
   start_date?: string
   end_date?: string
   customerId?: string
@@ -37,8 +37,8 @@ export default function BBPS() {
   const [searchParams, setSearchParams] = useState<TransactionSearchFields | null>(null)
 
   // Build query params for API
-  const buildQueryParams = (): Record<string, string> => {
-    const params: Record<string, string> = {
+  const buildQueryParams = (): Record<string, string | string[]> => {
+    const params: Record<string, string | string[]> = {
       page: String(pageIndex + 1),
       limit: String(pageSize),
     }
@@ -48,7 +48,7 @@ export default function BBPS() {
       if (searchParams.customerId) params.customer_id = searchParams.customerId
       if (searchParams.paymentStatus) params.status = searchParams.paymentStatus
       if (searchParams.mobileNumber) params.mobile = searchParams.mobileNumber
-      if (searchParams.category) params.category = searchParams.category
+      if (searchParams.category && Array.isArray(searchParams.category)) params.category = searchParams.category
       if (searchParams.start_date) params.start_date = searchParams.start_date
       if (searchParams.end_date) params.end_date = searchParams.end_date
     }
