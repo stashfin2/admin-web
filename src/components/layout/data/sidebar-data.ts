@@ -22,6 +22,7 @@ import {
   IconUsersGroup,
   IconMoneybag,
   IconReceiptRupee,
+  IconDevicesCheck
 } from '@tabler/icons-react'
 import { Command } from 'lucide-react'
 // import { ClerkLogo } from '@/assets/clerk-logo'
@@ -101,6 +102,11 @@ export const sidebarData: SidebarData = {
           title: 'Bureau',
           url: '/bureau',
           icon: IconClipboardText,
+         },
+         {
+          title: 'Wealth IFA',
+          url: '/wealth-ifa',
+          icon: IconDevicesCheck,
          }
         
         // Clerk links removed
