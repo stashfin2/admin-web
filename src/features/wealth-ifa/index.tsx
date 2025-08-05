@@ -82,8 +82,8 @@ export default function WealthIFA() {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['wealth-ifa', searchParams, pageIndex],
     queryFn: fetchWealthIFAUsers,
-    enabled: searchParams !== null, // Only fetch when a search is performed
-  })
+    enabled: true, // Fetch on every page load
+})
 
   const mappedData: WealthData[] = (data || []).map((item: WealthApiUser) => ({
     id: String(item.id ?? ''),
