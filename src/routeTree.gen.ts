@@ -27,11 +27,20 @@ import { Route as authForgotPasswordImport } from './routes/(auth)/forgot-passwo
 import { Route as ClerkAuthenticatedRouteImport } from './routes/clerk/_authenticated/route'
 import { Route as ClerkauthRouteImport } from './routes/clerk/(auth)/route'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings/route'
+import { Route as AuthenticatedWealthIfaIndexImport } from './routes/_authenticated/wealth-ifa/index'
 import { Route as AuthenticatedUsersIndexImport } from './routes/_authenticated/users/index'
+import { Route as AuthenticatedUpianalyticsIndexImport } from './routes/_authenticated/upi_analytics/index'
+import { Route as AuthenticatedUpiIndexImport } from './routes/_authenticated/upi/index'
 import { Route as AuthenticatedTasksIndexImport } from './routes/_authenticated/tasks/index'
 import { Route as AuthenticatedSettingsIndexImport } from './routes/_authenticated/settings/index'
 import { Route as AuthenticatedHelpCenterIndexImport } from './routes/_authenticated/help-center/index'
+import { Route as AuthenticatedCustomersIndexImport } from './routes/_authenticated/customers/index'
+import { Route as AuthenticatedCreditRepairIndexImport } from './routes/_authenticated/credit-repair/index'
 import { Route as AuthenticatedChatsIndexImport } from './routes/_authenticated/chats/index'
+import { Route as AuthenticatedBureauIndexImport } from './routes/_authenticated/bureau/index'
+import { Route as AuthenticatedBureauConsentIndexImport } from './routes/_authenticated/bureau-consent/index'
+import { Route as AuthenticatedBbpsIndexImport } from './routes/_authenticated/bbps/index'
+import { Route as AuthenticatedBbpsFileuploadIndexImport } from './routes/_authenticated/bbps-fileupload/index'
 import { Route as AuthenticatedAppsIndexImport } from './routes/_authenticated/apps/index'
 import { Route as ClerkAuthenticatedUserManagementImport } from './routes/clerk/_authenticated/user-management'
 import { Route as ClerkauthSignUpImport } from './routes/clerk/(auth)/sign-up'
@@ -138,9 +147,29 @@ const AuthenticatedSettingsRouteRoute = AuthenticatedSettingsRouteImport.update(
   } as any,
 )
 
+const AuthenticatedWealthIfaIndexRoute =
+  AuthenticatedWealthIfaIndexImport.update({
+    id: '/wealth-ifa/',
+    path: '/wealth-ifa/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
 const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexImport.update({
   id: '/users/',
   path: '/users/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+
+const AuthenticatedUpianalyticsIndexRoute =
+  AuthenticatedUpianalyticsIndexImport.update({
+    id: '/upi_analytics/',
+    path: '/upi_analytics/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedUpiIndexRoute = AuthenticatedUpiIndexImport.update({
+  id: '/upi/',
+  path: '/upi/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
@@ -165,11 +194,51 @@ const AuthenticatedHelpCenterIndexRoute =
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
+const AuthenticatedCustomersIndexRoute =
+  AuthenticatedCustomersIndexImport.update({
+    id: '/customers/',
+    path: '/customers/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedCreditRepairIndexRoute =
+  AuthenticatedCreditRepairIndexImport.update({
+    id: '/credit-repair/',
+    path: '/credit-repair/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
 const AuthenticatedChatsIndexRoute = AuthenticatedChatsIndexImport.update({
   id: '/chats/',
   path: '/chats/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+
+const AuthenticatedBureauIndexRoute = AuthenticatedBureauIndexImport.update({
+  id: '/bureau/',
+  path: '/bureau/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+
+const AuthenticatedBureauConsentIndexRoute =
+  AuthenticatedBureauConsentIndexImport.update({
+    id: '/bureau-consent/',
+    path: '/bureau-consent/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedBbpsIndexRoute = AuthenticatedBbpsIndexImport.update({
+  id: '/bbps/',
+  path: '/bbps/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+
+const AuthenticatedBbpsFileuploadIndexRoute =
+  AuthenticatedBbpsFileuploadIndexImport.update({
+    id: '/bbps-fileupload/',
+    path: '/bbps-fileupload/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 const AuthenticatedAppsIndexRoute = AuthenticatedAppsIndexImport.update({
   id: '/apps/',
@@ -396,11 +465,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppsIndexImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/bbps-fileupload/': {
+      id: '/_authenticated/bbps-fileupload/'
+      path: '/bbps-fileupload'
+      fullPath: '/bbps-fileupload'
+      preLoaderRoute: typeof AuthenticatedBbpsFileuploadIndexImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/bbps/': {
+      id: '/_authenticated/bbps/'
+      path: '/bbps'
+      fullPath: '/bbps'
+      preLoaderRoute: typeof AuthenticatedBbpsIndexImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/bureau-consent/': {
+      id: '/_authenticated/bureau-consent/'
+      path: '/bureau-consent'
+      fullPath: '/bureau-consent'
+      preLoaderRoute: typeof AuthenticatedBureauConsentIndexImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/bureau/': {
+      id: '/_authenticated/bureau/'
+      path: '/bureau'
+      fullPath: '/bureau'
+      preLoaderRoute: typeof AuthenticatedBureauIndexImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
     '/_authenticated/chats/': {
       id: '/_authenticated/chats/'
       path: '/chats'
       fullPath: '/chats'
       preLoaderRoute: typeof AuthenticatedChatsIndexImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/credit-repair/': {
+      id: '/_authenticated/credit-repair/'
+      path: '/credit-repair'
+      fullPath: '/credit-repair'
+      preLoaderRoute: typeof AuthenticatedCreditRepairIndexImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/customers/': {
+      id: '/_authenticated/customers/'
+      path: '/customers'
+      fullPath: '/customers'
+      preLoaderRoute: typeof AuthenticatedCustomersIndexImport
       parentRoute: typeof AuthenticatedRouteImport
     }
     '/_authenticated/help-center/': {
@@ -424,11 +535,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTasksIndexImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/upi/': {
+      id: '/_authenticated/upi/'
+      path: '/upi'
+      fullPath: '/upi'
+      preLoaderRoute: typeof AuthenticatedUpiIndexImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/upi_analytics/': {
+      id: '/_authenticated/upi_analytics/'
+      path: '/upi_analytics'
+      fullPath: '/upi_analytics'
+      preLoaderRoute: typeof AuthenticatedUpianalyticsIndexImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
     '/_authenticated/users/': {
       id: '/_authenticated/users/'
       path: '/users'
       fullPath: '/users'
       preLoaderRoute: typeof AuthenticatedUsersIndexImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/wealth-ifa/': {
+      id: '/_authenticated/wealth-ifa/'
+      path: '/wealth-ifa'
+      fullPath: '/wealth-ifa'
+      preLoaderRoute: typeof AuthenticatedWealthIfaIndexImport
       parentRoute: typeof AuthenticatedRouteImport
     }
   }
@@ -463,20 +595,38 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedSettingsRouteRoute: typeof AuthenticatedSettingsRouteRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedAppsIndexRoute: typeof AuthenticatedAppsIndexRoute
+  AuthenticatedBbpsFileuploadIndexRoute: typeof AuthenticatedBbpsFileuploadIndexRoute
+  AuthenticatedBbpsIndexRoute: typeof AuthenticatedBbpsIndexRoute
+  AuthenticatedBureauConsentIndexRoute: typeof AuthenticatedBureauConsentIndexRoute
+  AuthenticatedBureauIndexRoute: typeof AuthenticatedBureauIndexRoute
   AuthenticatedChatsIndexRoute: typeof AuthenticatedChatsIndexRoute
+  AuthenticatedCreditRepairIndexRoute: typeof AuthenticatedCreditRepairIndexRoute
+  AuthenticatedCustomersIndexRoute: typeof AuthenticatedCustomersIndexRoute
   AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
   AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
+  AuthenticatedUpiIndexRoute: typeof AuthenticatedUpiIndexRoute
+  AuthenticatedUpianalyticsIndexRoute: typeof AuthenticatedUpianalyticsIndexRoute
   AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
+  AuthenticatedWealthIfaIndexRoute: typeof AuthenticatedWealthIfaIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSettingsRouteRoute: AuthenticatedSettingsRouteRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedAppsIndexRoute: AuthenticatedAppsIndexRoute,
+  AuthenticatedBbpsFileuploadIndexRoute: AuthenticatedBbpsFileuploadIndexRoute,
+  AuthenticatedBbpsIndexRoute: AuthenticatedBbpsIndexRoute,
+  AuthenticatedBureauConsentIndexRoute: AuthenticatedBureauConsentIndexRoute,
+  AuthenticatedBureauIndexRoute: AuthenticatedBureauIndexRoute,
   AuthenticatedChatsIndexRoute: AuthenticatedChatsIndexRoute,
+  AuthenticatedCreditRepairIndexRoute: AuthenticatedCreditRepairIndexRoute,
+  AuthenticatedCustomersIndexRoute: AuthenticatedCustomersIndexRoute,
   AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
   AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
+  AuthenticatedUpiIndexRoute: AuthenticatedUpiIndexRoute,
+  AuthenticatedUpianalyticsIndexRoute: AuthenticatedUpianalyticsIndexRoute,
   AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
+  AuthenticatedWealthIfaIndexRoute: AuthenticatedWealthIfaIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -549,11 +699,20 @@ export interface FileRoutesByFullPath {
   '/clerk/sign-up': typeof ClerkauthSignUpRoute
   '/clerk/user-management': typeof ClerkAuthenticatedUserManagementRoute
   '/apps': typeof AuthenticatedAppsIndexRoute
+  '/bbps-fileupload': typeof AuthenticatedBbpsFileuploadIndexRoute
+  '/bbps': typeof AuthenticatedBbpsIndexRoute
+  '/bureau-consent': typeof AuthenticatedBureauConsentIndexRoute
+  '/bureau': typeof AuthenticatedBureauIndexRoute
   '/chats': typeof AuthenticatedChatsIndexRoute
+  '/credit-repair': typeof AuthenticatedCreditRepairIndexRoute
+  '/customers': typeof AuthenticatedCustomersIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
   '/settings/': typeof AuthenticatedSettingsIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
+  '/upi': typeof AuthenticatedUpiIndexRoute
+  '/upi_analytics': typeof AuthenticatedUpianalyticsIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
+  '/wealth-ifa': typeof AuthenticatedWealthIfaIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -577,11 +736,20 @@ export interface FileRoutesByTo {
   '/clerk/sign-up': typeof ClerkauthSignUpRoute
   '/clerk/user-management': typeof ClerkAuthenticatedUserManagementRoute
   '/apps': typeof AuthenticatedAppsIndexRoute
+  '/bbps-fileupload': typeof AuthenticatedBbpsFileuploadIndexRoute
+  '/bbps': typeof AuthenticatedBbpsIndexRoute
+  '/bureau-consent': typeof AuthenticatedBureauConsentIndexRoute
+  '/bureau': typeof AuthenticatedBureauIndexRoute
   '/chats': typeof AuthenticatedChatsIndexRoute
+  '/credit-repair': typeof AuthenticatedCreditRepairIndexRoute
+  '/customers': typeof AuthenticatedCustomersIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
   '/settings': typeof AuthenticatedSettingsIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
+  '/upi': typeof AuthenticatedUpiIndexRoute
+  '/upi_analytics': typeof AuthenticatedUpianalyticsIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
+  '/wealth-ifa': typeof AuthenticatedWealthIfaIndexRoute
 }
 
 export interface FileRoutesById {
@@ -610,11 +778,20 @@ export interface FileRoutesById {
   '/clerk/(auth)/sign-up': typeof ClerkauthSignUpRoute
   '/clerk/_authenticated/user-management': typeof ClerkAuthenticatedUserManagementRoute
   '/_authenticated/apps/': typeof AuthenticatedAppsIndexRoute
+  '/_authenticated/bbps-fileupload/': typeof AuthenticatedBbpsFileuploadIndexRoute
+  '/_authenticated/bbps/': typeof AuthenticatedBbpsIndexRoute
+  '/_authenticated/bureau-consent/': typeof AuthenticatedBureauConsentIndexRoute
+  '/_authenticated/bureau/': typeof AuthenticatedBureauIndexRoute
   '/_authenticated/chats/': typeof AuthenticatedChatsIndexRoute
+  '/_authenticated/credit-repair/': typeof AuthenticatedCreditRepairIndexRoute
+  '/_authenticated/customers/': typeof AuthenticatedCustomersIndexRoute
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexRoute
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
+  '/_authenticated/upi/': typeof AuthenticatedUpiIndexRoute
+  '/_authenticated/upi_analytics/': typeof AuthenticatedUpianalyticsIndexRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
+  '/_authenticated/wealth-ifa/': typeof AuthenticatedWealthIfaIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -643,11 +820,20 @@ export interface FileRouteTypes {
     | '/clerk/sign-up'
     | '/clerk/user-management'
     | '/apps'
+    | '/bbps-fileupload'
+    | '/bbps'
+    | '/bureau-consent'
+    | '/bureau'
     | '/chats'
+    | '/credit-repair'
+    | '/customers'
     | '/help-center'
     | '/settings/'
     | '/tasks'
+    | '/upi'
+    | '/upi_analytics'
     | '/users'
+    | '/wealth-ifa'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/clerk'
@@ -670,11 +856,20 @@ export interface FileRouteTypes {
     | '/clerk/sign-up'
     | '/clerk/user-management'
     | '/apps'
+    | '/bbps-fileupload'
+    | '/bbps'
+    | '/bureau-consent'
+    | '/bureau'
     | '/chats'
+    | '/credit-repair'
+    | '/customers'
     | '/help-center'
     | '/settings'
     | '/tasks'
+    | '/upi'
+    | '/upi_analytics'
     | '/users'
+    | '/wealth-ifa'
   id:
     | '__root__'
     | '/_authenticated'
@@ -701,11 +896,20 @@ export interface FileRouteTypes {
     | '/clerk/(auth)/sign-up'
     | '/clerk/_authenticated/user-management'
     | '/_authenticated/apps/'
+    | '/_authenticated/bbps-fileupload/'
+    | '/_authenticated/bbps/'
+    | '/_authenticated/bureau-consent/'
+    | '/_authenticated/bureau/'
     | '/_authenticated/chats/'
+    | '/_authenticated/credit-repair/'
+    | '/_authenticated/customers/'
     | '/_authenticated/help-center/'
     | '/_authenticated/settings/'
     | '/_authenticated/tasks/'
+    | '/_authenticated/upi/'
+    | '/_authenticated/upi_analytics/'
     | '/_authenticated/users/'
+    | '/_authenticated/wealth-ifa/'
   fileRoutesById: FileRoutesById
 }
 
@@ -769,10 +973,19 @@ export const routeTree = rootRoute
         "/_authenticated/settings",
         "/_authenticated/",
         "/_authenticated/apps/",
+        "/_authenticated/bbps-fileupload/",
+        "/_authenticated/bbps/",
+        "/_authenticated/bureau-consent/",
+        "/_authenticated/bureau/",
         "/_authenticated/chats/",
+        "/_authenticated/credit-repair/",
+        "/_authenticated/customers/",
         "/_authenticated/help-center/",
         "/_authenticated/tasks/",
-        "/_authenticated/users/"
+        "/_authenticated/upi/",
+        "/_authenticated/upi_analytics/",
+        "/_authenticated/users/",
+        "/_authenticated/wealth-ifa/"
       ]
     },
     "/clerk": {
@@ -874,8 +1087,32 @@ export const routeTree = rootRoute
       "filePath": "_authenticated/apps/index.tsx",
       "parent": "/_authenticated"
     },
+    "/_authenticated/bbps-fileupload/": {
+      "filePath": "_authenticated/bbps-fileupload/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/bbps/": {
+      "filePath": "_authenticated/bbps/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/bureau-consent/": {
+      "filePath": "_authenticated/bureau-consent/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/bureau/": {
+      "filePath": "_authenticated/bureau/index.tsx",
+      "parent": "/_authenticated"
+    },
     "/_authenticated/chats/": {
       "filePath": "_authenticated/chats/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/credit-repair/": {
+      "filePath": "_authenticated/credit-repair/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/customers/": {
+      "filePath": "_authenticated/customers/index.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/help-center/": {
@@ -890,8 +1127,20 @@ export const routeTree = rootRoute
       "filePath": "_authenticated/tasks/index.tsx",
       "parent": "/_authenticated"
     },
+    "/_authenticated/upi/": {
+      "filePath": "_authenticated/upi/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/upi_analytics/": {
+      "filePath": "_authenticated/upi_analytics/index.tsx",
+      "parent": "/_authenticated"
+    },
     "/_authenticated/users/": {
       "filePath": "_authenticated/users/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/wealth-ifa/": {
+      "filePath": "_authenticated/wealth-ifa/index.tsx",
       "parent": "/_authenticated"
     }
   }
