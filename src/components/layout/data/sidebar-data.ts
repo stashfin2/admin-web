@@ -22,7 +22,8 @@ import {
   IconUsersGroup,
   IconMoneybag,
   IconReceiptRupee,
-  IconDevicesCheck
+  IconDevicesCheck,
+  IconTrendingUp
 } from '@tabler/icons-react'
 import { Command } from 'lucide-react'
 // import { ClerkLogo } from '@/assets/clerk-logo'
@@ -67,8 +68,18 @@ export const sidebarData: SidebarData = {
           icon: IconMoneybag,
         },
         {
+          title: 'UPI Analytics',
+          url: '/upi_analytics',
+          icon: IconMoneybag,
+        },
+        {
           title: 'BBPS',
           url: '/bbps',
+          icon: IconReceiptRupee,
+        },
+        {
+          title: 'BBPS Fileupload',
+          url: '/bbps-fileupload',
           icon: IconReceiptRupee,
         },
          {
@@ -80,6 +91,16 @@ export const sidebarData: SidebarData = {
           title: 'Wealth IFA',
           url: '/wealth-ifa',
           icon: IconDevicesCheck,
+         },
+         {
+          title: 'Credit Repair',
+          url: '/credit-repair',
+          icon: IconTrendingUp,
+         },
+         {
+          title: 'Purge Bureau Consent',
+          url: '/bureau-consent',
+          icon: IconClipboardText,
          }
         
         // Clerk links removed
