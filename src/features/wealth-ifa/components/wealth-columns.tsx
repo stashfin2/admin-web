@@ -3,7 +3,7 @@ import { DataTableColumnHeader } from './data-table-column-header'
 import { StatusCell } from './status-cell'
 import type { WealthData } from './wealth-table'
 
-export const wealthColumns = (
+ export const wealthColumns = (
   searchParams: {
     customerId: string
     mobile: string
@@ -13,6 +13,7 @@ export const wealthColumns = (
   pageIndex: number,
   handleFileDownload?: (url: string, name: string) => void
 ): ColumnDef<WealthData>[] => [
+  // --- STATUS FIRST ---
   {
     accessorKey: 'status',
     header: ({ column }) => (
@@ -28,6 +29,19 @@ export const wealthColumns = (
         searchParams={searchParams}
         pageIndex={pageIndex}
       />
+    ),
+  },
+  // --- DB ORDER STARTS ---
+  {
+    accessorKey: 'id',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='ID' />
+    ),
+  },
+  {
+    accessorKey: 'entity_type',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Entity Type' />
     ),
   },
   {
@@ -61,6 +75,12 @@ export const wealthColumns = (
     ),
   },
   {
+    accessorKey: 'pan_txn_id',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='PAN Txn ID' />
+    ),
+  },
+  {
     accessorKey: 'accountNumber',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Account Number' />
@@ -79,6 +99,12 @@ export const wealthColumns = (
     ),
   },
   {
+    accessorKey: 'bank_txn_id',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Bank Txn ID' />
+    ),
+  },
+  {
     accessorKey: 'email',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Email' />
@@ -91,9 +117,15 @@ export const wealthColumns = (
     ),
   },
   {
+    accessorKey: 'aadhar_txn_id',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Aadhar Txn ID' />
+    ),
+  },
+  {
     accessorKey: 'panImgUrl',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='PAN' />
+      <DataTableColumnHeader column={column} title='PAN Image' />
     ),
     cell: ({ row }) => {
       const url = row.original.panImgUrl
@@ -114,7 +146,7 @@ export const wealthColumns = (
   {
     accessorKey: 'aadharImgUrl',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Aadhar' />
+      <DataTableColumnHeader column={column} title='Aadhar Image' />
     ),
     cell: ({ row }) => {
       const url = row.original.aadharImgUrl
@@ -163,9 +195,51 @@ export const wealthColumns = (
     ),
   },
   {
+    accessorKey: 'company_type',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Company Type' />
+    ),
+  },
+  {
     accessorKey: 'companyName',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Company Name' />
+    ),
+  },
+  {
+    accessorKey: 'personal_mobile',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Personal Mobile' />
+    ),
+  },
+  {
+    accessorKey: 'gstin',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='GSTIN' />
+    ),
+  },
+  {
+    accessorKey: 'gstin_txn_id',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='GSTIN Txn ID' />
+    ),
+  },
+  {
+    accessorKey: 'created_at',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Created At' />
+    ),
+  },
+  {
+    accessorKey: 'updated_at',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Updated At' />
+    ),
+  },
+  {
+    accessorKey: 'reason',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Reason' />
     ),
   },
 ]

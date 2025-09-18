@@ -21,23 +21,49 @@ const getToken = () => {
 
 type WealthApiUser = {
   id?: string | number;
+  entity_type?: string; // "individual" or "company"
   customer_id?: string | number;
   name?: string;
   mobile?: string;
-  product?: string;
+  personal_mobile?: string;
+  email?: string;
+
+  // PAN details
   pan?: string;
+  //pan_txn_id?: string;
+  pan_img_url?: string;
+
+  // Aadhaar details
+  aadhar?: string;
+  //aadhar_txn_id?: string;
+  aadhar_img_url?: string;
+
+  // Bank details
   account_number?: string;
   bank_name?: string;
-  ifsc?: string | number;
-  email?: string;
-  aadhar?: string;
-  pan_img_url?: string;
-  aadhar_img_url?: string;
+  ifsc?: string;
+  //bank_txn_id?: string;
   cancelled_cheque_img_url?: string;
-  status?: string;
-  arn?: string;
+
+  // GST
+  gstin?: string;
+  //gstin_txn_id?: string;
+
+  // Company details
+  company_type?: string;
   company_name?: string;
+
+  // Other info
+  product?: string | null;
+  status?: string; // e.g. "pending"
+  arn?: string | null;
+  reason?: string | null;
+
+  // Metadata
+  created_at?: string; // ISO timestamp
+  updated_at?: string; // ISO timestamp
 };
+
 
 
 export default function WealthIFA() {
@@ -85,9 +111,9 @@ export default function WealthIFA() {
     enabled: true, // Fetch on every page load
 
   })
- 
 
-  const mappedData: WealthData[] = (data || []).map((item: WealthApiUser) => ({
+
+  const mappedData: WealthData[] = (data as WealthApiUser[] || []).map((item: WealthApiUser) => ({
     id: String(item.id ?? ''),
     customerId: String(item.customer_id ?? ''),
     name: String(item.name ?? ''),
@@ -96,7 +122,7 @@ export default function WealthIFA() {
     pan: String(item.pan ?? ''),
     accountNumber: String(item.account_number ?? ''),
     bankName: String(item.bank_name ?? ''),
-    ifsc: item.ifsc ? String(item.ifsc) : 0,
+    ifsc: String(item.ifsc ?? ''),
     email: String(item.email ?? ''),
     aadhar: String(item.aadhar ?? ''),
     panImgUrl: String(item.pan_img_url ?? ''),
@@ -105,58 +131,65 @@ export default function WealthIFA() {
     status: String(item.status ?? ''),
     arn: String(item.arn ?? ''),
     companyName: String(item.company_name ?? ''),
+    entity_type: String(item.entity_type ?? ''),
+    personal_mobile: String(item.personal_mobile ?? ''),
+    gstin: String(item.gstin ?? ''),
+    reason: String(item.reason ?? ''),
+    company_type: String(item.company_type ?? ''),
+    created_at: String(item.created_at ?? ''),
+    updated_at: String(item.updated_at ?? ''),
   }))
 
   const handleFileDownload = async (fileUrl: string, fileName: string) => {
-  try {
-    const token = getToken()
-    const response = await axios.get(`${BACKEND_BASE_URL}/v1/wealth/ifa/file`, {
-      params: { url: fileUrl },
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      responseType: 'blob',
-    })
+    try {
+      const token = getToken()
+      const response = await axios.get(`${BACKEND_BASE_URL}/v1/wealth/ifa/file`, {
+        params: { url: fileUrl },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        responseType: 'blob',
+      })
 
-    // Extract MIME type from response headers
-    const contentType = response.headers['content-type'] || 'application/octet-stream'
-    
-    // Extract file extension from the fileUrl
-    const getFileExtensionFromUrl = (url: string): string => {
-      try {
-        // Decode the URL to handle encoded characters
-        const decodedUrl = decodeURIComponent(url)
-        // Extract the filename from the URL path
-        const urlParts = decodedUrl.split('/')
-        const filename = urlParts[urlParts.length - 1]
-        // Extract extension from filename
-        const extensionMatch = filename.match(/\.([^.]+)$/)
-        if (extensionMatch) {
-          return '.' + extensionMatch[1].toLowerCase()
+      // Extract MIME type from response headers
+      const contentType = response.headers['content-type'] || 'application/octet-stream'
+
+      // Extract file extension from the fileUrl
+      const getFileExtensionFromUrl = (url: string): string => {
+        try {
+          // Decode the URL to handle encoded characters
+          const decodedUrl = decodeURIComponent(url)
+          // Extract the filename from the URL path
+          const urlParts = decodedUrl.split('/')
+          const filename = urlParts[urlParts.length - 1]
+          // Extract extension from filename
+          const extensionMatch = filename.match(/\.([^.]+)$/)
+          if (extensionMatch) {
+            return '.' + extensionMatch[1].toLowerCase()
+          }
+          return ''
+        } catch (_error) {
+          return ''
         }
-        return ''
-      } catch (_error) {
-        return ''
       }
+
+      // Get file extension from URL
+      const fileExtension = getFileExtensionFromUrl(fileUrl)
+
+      // Create final filename with correct extension
+      const finalFileName = fileExtension ? fileName + fileExtension : fileName
+
+      const blob = new Blob([response.data], { type: contentType })
+      const downloadUrl = window.URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = downloadUrl
+      a.download = finalFileName
+      a.click()
+      window.URL.revokeObjectURL(downloadUrl)
+    } catch (error) {
+      alert(`Failed to download file: ${getErrorMessage(error)}`)
     }
-    
-    // Get file extension from URL
-    const fileExtension = getFileExtensionFromUrl(fileUrl)
-    
-    // Create final filename with correct extension
-    const finalFileName = fileExtension ? fileName + fileExtension : fileName
-    
-    const blob = new Blob([response.data], { type: contentType })
-    const downloadUrl = window.URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = downloadUrl
-    a.download = finalFileName
-    a.click()
-    window.URL.revokeObjectURL(downloadUrl)
-  } catch (error) {
-    alert(`Failed to download file: ${getErrorMessage(error)}`)
   }
-}
 
 
   const getErrorMessage = (err: unknown): string => {
@@ -219,7 +252,7 @@ export default function WealthIFA() {
             <div className='text-red-500'>Error: {getErrorMessage(error)}</div>
           ) : (
             <>
-            <WealthTable columns={columns} data={mappedData} />
+              <WealthTable columns={columns} data={mappedData} />
               <WealthTablePagination
                 pageIndex={pageIndex}
                 setPageIndex={setPageIndex}

@@ -36,6 +36,13 @@ export interface WealthData {
   status: string
   arn: string
   companyName: string
+  entity_type: string
+  personal_mobile: string
+  gstin: string
+  reason: string 
+  company_type: string
+  created_at: string
+  updated_at: string
 }
 interface WealthTableProps {
   data: WealthData[],
