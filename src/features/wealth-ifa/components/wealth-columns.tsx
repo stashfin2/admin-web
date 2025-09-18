@@ -59,7 +59,7 @@ import type { WealthData } from './wealth-table'
   {
     accessorKey: 'mobile',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Mobile' />
+      <DataTableColumnHeader column={column} title='Registered Mobile' />
     ),
   },
   {
@@ -72,12 +72,6 @@ import type { WealthData } from './wealth-table'
     accessorKey: 'pan',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='PAN' />
-    ),
-  },
-  {
-    accessorKey: 'pan_txn_id',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='PAN Txn ID' />
     ),
   },
   {
@@ -99,12 +93,6 @@ import type { WealthData } from './wealth-table'
     ),
   },
   {
-    accessorKey: 'bank_txn_id',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Bank Txn ID' />
-    ),
-  },
-  {
     accessorKey: 'email',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Email' />
@@ -114,12 +102,6 @@ import type { WealthData } from './wealth-table'
     accessorKey: 'aadhar',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Aadhar' />
-    ),
-  },
-  {
-    accessorKey: 'aadhar_txn_id',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Aadhar Txn ID' />
     ),
   },
   {
@@ -216,12 +198,6 @@ import type { WealthData } from './wealth-table'
     accessorKey: 'gstin',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='GSTIN' />
-    ),
-  },
-  {
-    accessorKey: 'gstin_txn_id',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='GSTIN Txn ID' />
     ),
   },
   {
