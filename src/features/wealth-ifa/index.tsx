@@ -37,6 +37,8 @@ type WealthApiUser = {
   status?: string;
   arn?: string;
   company_name?: string;
+  created_at?: string;
+  updated_at?: string;
 };
 
 
@@ -105,6 +107,8 @@ export default function WealthIFA() {
     status: String(item.status ?? ''),
     arn: String(item.arn ?? ''),
     companyName: String(item.company_name ?? ''),
+    created_at: String(item.created_at ?? ''),
+    updated_at: String(item.updated_at ?? ''),
   }))
 
   const handleFileDownload = async (fileUrl: string, fileName: string) => {
