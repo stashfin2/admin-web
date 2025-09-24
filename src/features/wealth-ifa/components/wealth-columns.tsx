@@ -168,4 +168,16 @@ export const wealthColumns = (
       <DataTableColumnHeader column={column} title='Company Name' />
     ),
   },
+  {
+    accessorKey: 'created_at',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Created At' />
+    ),
+  },
+  {
+    accessorKey: 'updated_at',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Updated At' />
+    ),
+  },
 ]
