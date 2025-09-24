@@ -101,7 +101,12 @@ export const sidebarData: SidebarData = {
           title: 'Purge Bureau Consent',
           url: '/bureau-consent',
           icon: IconClipboardText,
-         }
+         },
+         {
+          title: 'Payment Gateway',
+          url: '/payment-gateway',
+          icon: IconReceiptRupee,}
+
         
         // Clerk links removed
       ],

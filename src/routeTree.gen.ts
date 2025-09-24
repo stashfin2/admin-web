@@ -33,6 +33,7 @@ import { Route as AuthenticatedUpianalyticsIndexImport } from './routes/_authent
 import { Route as AuthenticatedUpiIndexImport } from './routes/_authenticated/upi/index'
 import { Route as AuthenticatedTasksIndexImport } from './routes/_authenticated/tasks/index'
 import { Route as AuthenticatedSettingsIndexImport } from './routes/_authenticated/settings/index'
+import { Route as AuthenticatedPaymentGatewayIndexImport } from './routes/_authenticated/payment-gateway/index'
 import { Route as AuthenticatedHelpCenterIndexImport } from './routes/_authenticated/help-center/index'
 import { Route as AuthenticatedCustomersIndexImport } from './routes/_authenticated/customers/index'
 import { Route as AuthenticatedCreditRepairIndexImport } from './routes/_authenticated/credit-repair/index'
@@ -186,6 +187,13 @@ const AuthenticatedSettingsIndexRoute = AuthenticatedSettingsIndexImport.update(
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
   } as any,
 )
+
+const AuthenticatedPaymentGatewayIndexRoute =
+  AuthenticatedPaymentGatewayIndexImport.update({
+    id: '/payment-gateway/',
+    path: '/payment-gateway/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 const AuthenticatedHelpCenterIndexRoute =
   AuthenticatedHelpCenterIndexImport.update({
@@ -521,6 +529,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedHelpCenterIndexImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/payment-gateway/': {
+      id: '/_authenticated/payment-gateway/'
+      path: '/payment-gateway'
+      fullPath: '/payment-gateway'
+      preLoaderRoute: typeof AuthenticatedPaymentGatewayIndexImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
     '/_authenticated/settings/': {
       id: '/_authenticated/settings/'
       path: '/'
@@ -603,6 +618,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCreditRepairIndexRoute: typeof AuthenticatedCreditRepairIndexRoute
   AuthenticatedCustomersIndexRoute: typeof AuthenticatedCustomersIndexRoute
   AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
+  AuthenticatedPaymentGatewayIndexRoute: typeof AuthenticatedPaymentGatewayIndexRoute
   AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
   AuthenticatedUpiIndexRoute: typeof AuthenticatedUpiIndexRoute
   AuthenticatedUpianalyticsIndexRoute: typeof AuthenticatedUpianalyticsIndexRoute
@@ -622,6 +638,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCreditRepairIndexRoute: AuthenticatedCreditRepairIndexRoute,
   AuthenticatedCustomersIndexRoute: AuthenticatedCustomersIndexRoute,
   AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
+  AuthenticatedPaymentGatewayIndexRoute: AuthenticatedPaymentGatewayIndexRoute,
   AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
   AuthenticatedUpiIndexRoute: AuthenticatedUpiIndexRoute,
   AuthenticatedUpianalyticsIndexRoute: AuthenticatedUpianalyticsIndexRoute,
@@ -707,6 +724,7 @@ export interface FileRoutesByFullPath {
   '/credit-repair': typeof AuthenticatedCreditRepairIndexRoute
   '/customers': typeof AuthenticatedCustomersIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
+  '/payment-gateway': typeof AuthenticatedPaymentGatewayIndexRoute
   '/settings/': typeof AuthenticatedSettingsIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
   '/upi': typeof AuthenticatedUpiIndexRoute
@@ -744,6 +762,7 @@ export interface FileRoutesByTo {
   '/credit-repair': typeof AuthenticatedCreditRepairIndexRoute
   '/customers': typeof AuthenticatedCustomersIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
+  '/payment-gateway': typeof AuthenticatedPaymentGatewayIndexRoute
   '/settings': typeof AuthenticatedSettingsIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
   '/upi': typeof AuthenticatedUpiIndexRoute
@@ -786,6 +805,7 @@ export interface FileRoutesById {
   '/_authenticated/credit-repair/': typeof AuthenticatedCreditRepairIndexRoute
   '/_authenticated/customers/': typeof AuthenticatedCustomersIndexRoute
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexRoute
+  '/_authenticated/payment-gateway/': typeof AuthenticatedPaymentGatewayIndexRoute
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
   '/_authenticated/upi/': typeof AuthenticatedUpiIndexRoute
@@ -828,6 +848,7 @@ export interface FileRouteTypes {
     | '/credit-repair'
     | '/customers'
     | '/help-center'
+    | '/payment-gateway'
     | '/settings/'
     | '/tasks'
     | '/upi'
@@ -864,6 +885,7 @@ export interface FileRouteTypes {
     | '/credit-repair'
     | '/customers'
     | '/help-center'
+    | '/payment-gateway'
     | '/settings'
     | '/tasks'
     | '/upi'
@@ -904,6 +926,7 @@ export interface FileRouteTypes {
     | '/_authenticated/credit-repair/'
     | '/_authenticated/customers/'
     | '/_authenticated/help-center/'
+    | '/_authenticated/payment-gateway/'
     | '/_authenticated/settings/'
     | '/_authenticated/tasks/'
     | '/_authenticated/upi/'
@@ -981,6 +1004,7 @@ export const routeTree = rootRoute
         "/_authenticated/credit-repair/",
         "/_authenticated/customers/",
         "/_authenticated/help-center/",
+        "/_authenticated/payment-gateway/",
         "/_authenticated/tasks/",
         "/_authenticated/upi/",
         "/_authenticated/upi_analytics/",
@@ -1117,6 +1141,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/help-center/": {
       "filePath": "_authenticated/help-center/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/payment-gateway/": {
+      "filePath": "_authenticated/payment-gateway/index.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/settings/": {
