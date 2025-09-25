@@ -8,8 +8,7 @@ import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
-import { TableSelector, TableOption } from './components/TableSelector'
-import { ActionButtons } from './components/ActionButtons'
+import { TableOption } from './components/TableSelector'
 import { EntityTable, TableColumn } from './components/EntityTable'
 import { EntityModal } from './components/EntityModal'
 
@@ -195,22 +194,46 @@ export default function PaymentGateway() {
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-4 mb-4">
-          <TableSelector
-            options={TABLES}
-            value={selectedTable}
-            onChange={setSelectedTable}
-          />
-          <ActionButtons
-            onCreate={() => { setShowCreateModal(true); setModalType(selectedTable) }}
-            onUpdate={() => { setShowUpdateModal(true); setModalType(selectedTable) }}
-            entityLabel={TABLES.find(t => t.key === selectedTable)?.label || ''}
-          />
+        <div className="flex flex-col gap-2 mb-4">
+          <div className="flex gap-2">
+            {TABLES.map(t => (
+              <button
+                key={t.key}
+                onClick={() => setSelectedTable(t.key)}
+                className={`px-4 py-2 rounded font-semibold transition-colors border dark:border-gray-700 focus:outline-none ${selectedTable === t.key
+                  ? 'bg-blue-600 text-white dark:bg-blue-400 dark:text-black shadow'
+                  : 'bg-gray-100 text-black dark:bg-gray-800 dark:text-white hover:bg-blue-100 dark:hover:bg-blue-900'}`}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+          <div className="flex justify-between items-center mt-2">
+            <button
+              className="bg-green-600 dark:bg-green-500 text-white dark:text-black px-4 py-2 rounded font-semibold shadow hover:bg-green-700 dark:hover:bg-green-400"
+              onClick={() => { setShowCreateModal(true); setModalType(selectedTable) }}
+            >
+              Create {TABLES.find(t => t.key === selectedTable)?.label}
+            </button>
+          </div>
         </div>
         <EntityTable
-          columns={getColumnsForTable(selectedTable)}
-          data={tableData}
+          columns={[...getColumnsForTable(selectedTable), { key: '__actions', label: 'Actions' }]}
+          data={tableData.map(row => ({ ...row, __actions: '' }))}
           loading={loading}
+          renderActions={row => (
+            <button
+              className="bg-yellow-500 dark:bg-yellow-400 text-white dark:text-black px-3 py-1 rounded hover:bg-yellow-600 dark:hover:bg-yellow-300"
+              onClick={() => {
+                setShowUpdateModal(true);
+                setModalType(selectedTable);
+                // Optionally store row id for editing
+                window.__editRowId = row.id || row.client_id || row.gateway_id || row.merchant_ref || row.category_name || row.mode_id;
+              }}
+            >
+              Update
+            </button>
+          )}
         />
         {(!loading && tableData.length === 0) && (
           <div className="text-center text-gray-500 dark:text-gray-400 mt-4">No data available. Table structure is shown for preview.</div>
