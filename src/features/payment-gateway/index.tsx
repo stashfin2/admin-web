@@ -65,6 +65,12 @@ function getColumnsForTable(table: string): TableColumn[] {
 }
 
 
+declare global {
+  interface Window {
+    __editRowId?: string;
+  }
+}
+
 export default function PaymentGateway() {
   const [selectedTable, setSelectedTable] = useState(TABLES[0].key)
   const [tableData, setTableData] = useState<any[]>([])
@@ -84,7 +90,13 @@ export default function PaymentGateway() {
     axios.get(API_URLS[selectedTable], {
       headers: { Authorization: `Bearer ${token}` }
     })
-      .then(res => setTableData(res.data.data))
+      .then(res => {
+        if (res.data.data && res.data.data.length > 0) {
+          setTableData(res.data.data)
+        } else {
+          setTableData([])
+        }
+      })
       .catch(() => {
         setTableData([])
       })
@@ -219,21 +231,23 @@ export default function PaymentGateway() {
         </div>
         <EntityTable
           columns={[...getColumnsForTable(selectedTable), { key: '__actions', label: 'Actions' }]}
-          data={tableData.map(row => ({ ...row, __actions: '' }))}
+          data={tableData.map(row => ({
+            ...row,
+            __actions: (
+              <button
+                className="bg-yellow-500 dark:bg-yellow-400 text-white dark:text-black px-3 py-1 rounded hover:bg-yellow-600 dark:hover:bg-yellow-300"
+                onClick={() => {
+                  setShowUpdateModal(true);
+                  setModalType(selectedTable);
+                  // Optionally store row id for editing
+                  window.__editRowId = row.id || row.client_id || row.gateway_id || row.merchant_ref || row.category_name || row.mode_id;
+                }}
+              >
+                Update
+              </button>
+            )
+          }))}
           loading={loading}
-          renderActions={row => (
-            <button
-              className="bg-yellow-500 dark:bg-yellow-400 text-white dark:text-black px-3 py-1 rounded hover:bg-yellow-600 dark:hover:bg-yellow-300"
-              onClick={() => {
-                setShowUpdateModal(true);
-                setModalType(selectedTable);
-                // Optionally store row id for editing
-                window.__editRowId = row.id || row.client_id || row.gateway_id || row.merchant_ref || row.category_name || row.mode_id;
-              }}
-            >
-              Update
-            </button>
-          )}
         />
         {(!loading && tableData.length === 0) && (
           <div className="text-center text-gray-500 dark:text-gray-400 mt-4">No data available. Table structure is shown for preview.</div>
