@@ -107,7 +107,7 @@ export default function BBPS() {
       account_no: String(t.account_no ?? ''),
       order_id: String(t.order_id ?? ''),
       txn_error_code: String(t.txn_error_code ?? ''),
-      txn_error_msg: String(t.txn_error_msg ?? ''),
+      txn_error_msg: String(t.txm_error_msg ?? ''),
       status_error_code: String(t.status_error_code ?? ''),
       status_error_msg: String(t.status_error_msg ?? ''),
     }
