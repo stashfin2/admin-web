@@ -33,6 +33,11 @@ export interface Transaction {
   createdAt: string
   updaredAt: string
   account_no?: string
+  order_id?: string
+  txn_error_code?: string
+  txn_error_msg?: string
+  status_error_code?: string
+  status_error_msg?: string
 }
 
 interface TransactionsTableProps {
