@@ -82,4 +82,34 @@ export const bbpsColumns: ColumnDef<Transaction>[] = [
       <DataTableColumnHeader column={column} title='BBPS Reference Code' />
     ),
   },
+  {
+    accessorKey: 'order_id',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Order ID' />
+    ),
+  },
+  {
+    accessorKey: 'txn_error_code',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Transaction Error Code' />
+    ),
+  },
+  {
+    accessorKey: 'txn_error_msg',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Transaction Error Message' />
+    ),
+  },
+  {
+    accessorKey: 'status_error_code',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Status Error Code' />
+    ),
+  },
+  {
+    accessorKey: 'status_error_msg',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Status Error Message' />
+    ),
+  },
 ]
