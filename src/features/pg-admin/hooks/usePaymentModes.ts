@@ -1,0 +1,26 @@
+import { useQuery } from '@tanstack/react-query'
+import { listPaymentModes, getPaymentMode } from '../api/pgAdminEndpoints'
+
+export const PMK = {
+  list: (p: any) => ['pg-admin', 'payment-modes', 'list', p] as const,
+  byId: (id: number | string) => ['pg-admin', 'payment-modes', 'id', String(id)] as const,
+}
+
+export function usePaymentModesList(params: {
+  category?: string
+  page?: number
+  size?: number
+}) {
+  return useQuery({
+    queryKey: PMK.list(params),
+    queryFn: async () => (await listPaymentModes(params)).data
+  })
+}
+
+export function usePaymentMode(id: number | string) {
+  return useQuery({
+    queryKey: PMK.byId(id),
+    queryFn: async () => (await getPaymentMode(id)).data,
+    enabled: !!id
+  })
+}

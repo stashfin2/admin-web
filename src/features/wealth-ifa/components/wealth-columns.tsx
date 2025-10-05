@@ -189,6 +189,7 @@ import type { WealthData } from './wealth-table'
     ),
   },
   {
+<<<<<<< HEAD
     accessorKey: 'personal_mobile',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Personal Mobile' />
@@ -201,6 +202,8 @@ import type { WealthData } from './wealth-table'
     ),
   },
   {
+=======
+>>>>>>> NLV-1371_new
     accessorKey: 'created_at',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Created At' />
@@ -212,10 +215,13 @@ import type { WealthData } from './wealth-table'
       <DataTableColumnHeader column={column} title='Updated At' />
     ),
   },
+<<<<<<< HEAD
   {
     accessorKey: 'reason',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Reason' />
     ),
   },
+=======
+>>>>>>> NLV-1371_new
 ]
