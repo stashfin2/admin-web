@@ -16,7 +16,13 @@ export function useVendorsList(params: {
   return useQuery({
     queryKey: VK.list(params),
     queryFn: async () => {
-      const response = (await listVendors(params)).data
+      // Convert "all" to undefined for API calls
+      const apiParams = {
+        ...params,
+        status: params.status === 'all' ? undefined : params.status,
+        code: params.code || undefined
+      }
+      const response = (await listVendors(apiParams)).data
       // Map API response structure to expected UI structure
       return {
         content: response.items || [],

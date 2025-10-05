@@ -248,8 +248,8 @@ function RotateCredsDialog({
 
 function MerchantsPage() {
   const [filters, setFilters] = useState({
-    vendor_id: '',
-    status: '',
+    vendor_id: 'all',
+    status: 'all',
     merchant_ref: '',
     page: 1,
     size: 20
@@ -258,8 +258,8 @@ function MerchantsPage() {
   const [editingMerchant, setEditingMerchant] = useState<Merchant | undefined>()
 
   const { data, isLoading, error } = useMerchantsList({
-    vendor_id: filters.vendor_id ? parseInt(filters.vendor_id) : undefined,
-    status: filters.status || undefined,
+    vendor_id: filters.vendor_id && filters.vendor_id !== 'all' ? parseInt(filters.vendor_id) : undefined,
+    status: filters.status,
     merchant_ref: filters.merchant_ref || undefined,
     page: filters.page,
     size: filters.size
@@ -404,7 +404,7 @@ function MerchantsPage() {
                 <SelectValue placeholder="All vendors" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All vendors</SelectItem>
+                <SelectItem value="all">All vendors</SelectItem>
                 {vendorsData?.content?.map((vendor: any) => (
                   <SelectItem key={vendor.id} value={vendor.id.toString()}>
                     {vendor.name}
@@ -424,7 +424,7 @@ function MerchantsPage() {
                 <SelectValue placeholder="All statuses" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All statuses</SelectItem>
+                <SelectItem value="all">All statuses</SelectItem>
                 <SelectItem value="ACTIVE">Active</SelectItem>
                 <SelectItem value="INACTIVE">Inactive</SelectItem>
               </SelectContent>

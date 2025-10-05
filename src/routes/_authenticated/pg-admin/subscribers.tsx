@@ -339,7 +339,7 @@ function RotateSecretDialog({
 
 function SubscribersPage() {
   const [filters, setFilters] = useState({
-    status: '',
+    status: 'all',
     query: '',
     page: 1,
     size: 20
@@ -347,12 +347,7 @@ function SubscribersPage() {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [editingSubscriber, setEditingSubscriber] = useState<Subscriber | undefined>()
 
-  const { data, isLoading, error } = useSubscribersList({
-    status: filters.status || undefined,
-    query: filters.query || undefined,
-    page: filters.page,
-    size: filters.size
-  })
+  const { data, isLoading, error } = useSubscribersList(filters)
   
   const { create, update } = useSubscriberMutations()
 
@@ -512,7 +507,7 @@ function SubscribersPage() {
                 <SelectValue placeholder="All statuses" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All statuses</SelectItem>
+                <SelectItem value="all">All statuses</SelectItem>
                 <SelectItem value="ACTIVE">Active</SelectItem>
                 <SelectItem value="INACTIVE">Inactive</SelectItem>
               </SelectContent>
