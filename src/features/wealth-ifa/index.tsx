@@ -52,7 +52,6 @@ type WealthApiUser = {
   // Company details
   company_type?: string;
   company_name?: string;
-<<<<<<< HEAD
 
   // Other info
   product?: string | null;
@@ -63,10 +62,6 @@ type WealthApiUser = {
   // Metadata
   created_at?: string; // ISO timestamp
   updated_at?: string; // ISO timestamp
-=======
-  created_at?: string;
-  updated_at?: string;
->>>>>>> NLV-1371_new
 };
 
 
@@ -136,14 +131,11 @@ export default function WealthIFA() {
     status: String(item.status ?? ''),
     arn: String(item.arn ?? ''),
     companyName: String(item.company_name ?? ''),
-<<<<<<< HEAD
     entity_type: String(item.entity_type ?? ''),
     personal_mobile: String(item.personal_mobile ?? ''),
     gstin: String(item.gstin ?? ''),
     reason: String(item.reason ?? ''),
     company_type: String(item.company_type ?? ''),
-=======
->>>>>>> NLV-1371_new
     created_at: String(item.created_at ?? ''),
     updated_at: String(item.updated_at ?? ''),
   }))
