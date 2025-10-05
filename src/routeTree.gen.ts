@@ -49,6 +49,12 @@ import { Route as AuthenticatedSettingsNotificationsImport } from './routes/_aut
 import { Route as AuthenticatedSettingsDisplayImport } from './routes/_authenticated/settings/display'
 import { Route as AuthenticatedSettingsAppearanceImport } from './routes/_authenticated/settings/appearance'
 import { Route as AuthenticatedSettingsAccountImport } from './routes/_authenticated/settings/account'
+import { Route as AuthenticatedPgAdminVendorsImport } from './routes/_authenticated/pg-admin/vendors'
+import { Route as AuthenticatedPgAdminSubscribersImport } from './routes/_authenticated/pg-admin/subscribers'
+import { Route as AuthenticatedPgAdminPaymentModesImport } from './routes/_authenticated/pg-admin/payment-modes'
+import { Route as AuthenticatedPgAdminMerchantsImport } from './routes/_authenticated/pg-admin/merchants'
+import { Route as AuthenticatedPgAdminSpmcSidImport } from './routes/_authenticated/pg-admin/spmc.$sid'
+import { Route as AuthenticatedPgAdminRoutesSidImport } from './routes/_authenticated/pg-admin/routes.$sid'
 
 // Create/Update Routes
 
@@ -293,6 +299,48 @@ const AuthenticatedSettingsAccountRoute =
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
   } as any)
 
+const AuthenticatedPgAdminVendorsRoute =
+  AuthenticatedPgAdminVendorsImport.update({
+    id: '/pg-admin/vendors',
+    path: '/pg-admin/vendors',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedPgAdminSubscribersRoute =
+  AuthenticatedPgAdminSubscribersImport.update({
+    id: '/pg-admin/subscribers',
+    path: '/pg-admin/subscribers',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedPgAdminPaymentModesRoute =
+  AuthenticatedPgAdminPaymentModesImport.update({
+    id: '/pg-admin/payment-modes',
+    path: '/pg-admin/payment-modes',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedPgAdminMerchantsRoute =
+  AuthenticatedPgAdminMerchantsImport.update({
+    id: '/pg-admin/merchants',
+    path: '/pg-admin/merchants',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedPgAdminSpmcSidRoute =
+  AuthenticatedPgAdminSpmcSidImport.update({
+    id: '/pg-admin/spmc/$sid',
+    path: '/pg-admin/spmc/$sid',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedPgAdminRoutesSidRoute =
+  AuthenticatedPgAdminRoutesSidImport.update({
+    id: '/pg-admin/routes/$sid',
+    path: '/pg-admin/routes/$sid',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -407,6 +455,34 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedIndexImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/pg-admin/merchants': {
+      id: '/_authenticated/pg-admin/merchants'
+      path: '/pg-admin/merchants'
+      fullPath: '/pg-admin/merchants'
+      preLoaderRoute: typeof AuthenticatedPgAdminMerchantsImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/pg-admin/payment-modes': {
+      id: '/_authenticated/pg-admin/payment-modes'
+      path: '/pg-admin/payment-modes'
+      fullPath: '/pg-admin/payment-modes'
+      preLoaderRoute: typeof AuthenticatedPgAdminPaymentModesImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/pg-admin/subscribers': {
+      id: '/_authenticated/pg-admin/subscribers'
+      path: '/pg-admin/subscribers'
+      fullPath: '/pg-admin/subscribers'
+      preLoaderRoute: typeof AuthenticatedPgAdminSubscribersImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/pg-admin/vendors': {
+      id: '/_authenticated/pg-admin/vendors'
+      path: '/pg-admin/vendors'
+      fullPath: '/pg-admin/vendors'
+      preLoaderRoute: typeof AuthenticatedPgAdminVendorsImport
       parentRoute: typeof AuthenticatedRouteImport
     }
     '/_authenticated/settings/account': {
@@ -563,6 +639,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedWealthIfaIndexImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/pg-admin/routes/$sid': {
+      id: '/_authenticated/pg-admin/routes/$sid'
+      path: '/pg-admin/routes/$sid'
+      fullPath: '/pg-admin/routes/$sid'
+      preLoaderRoute: typeof AuthenticatedPgAdminRoutesSidImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/pg-admin/spmc/$sid': {
+      id: '/_authenticated/pg-admin/spmc/$sid'
+      path: '/pg-admin/spmc/$sid'
+      fullPath: '/pg-admin/spmc/$sid'
+      preLoaderRoute: typeof AuthenticatedPgAdminSpmcSidImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
   }
 }
 
@@ -594,6 +684,10 @@ const AuthenticatedSettingsRouteRouteWithChildren =
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedSettingsRouteRoute: typeof AuthenticatedSettingsRouteRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+  AuthenticatedPgAdminMerchantsRoute: typeof AuthenticatedPgAdminMerchantsRoute
+  AuthenticatedPgAdminPaymentModesRoute: typeof AuthenticatedPgAdminPaymentModesRoute
+  AuthenticatedPgAdminSubscribersRoute: typeof AuthenticatedPgAdminSubscribersRoute
+  AuthenticatedPgAdminVendorsRoute: typeof AuthenticatedPgAdminVendorsRoute
   AuthenticatedAppsIndexRoute: typeof AuthenticatedAppsIndexRoute
   AuthenticatedBbpsFileuploadIndexRoute: typeof AuthenticatedBbpsFileuploadIndexRoute
   AuthenticatedBbpsIndexRoute: typeof AuthenticatedBbpsIndexRoute
@@ -608,11 +702,17 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedUpianalyticsIndexRoute: typeof AuthenticatedUpianalyticsIndexRoute
   AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
   AuthenticatedWealthIfaIndexRoute: typeof AuthenticatedWealthIfaIndexRoute
+  AuthenticatedPgAdminRoutesSidRoute: typeof AuthenticatedPgAdminRoutesSidRoute
+  AuthenticatedPgAdminSpmcSidRoute: typeof AuthenticatedPgAdminSpmcSidRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSettingsRouteRoute: AuthenticatedSettingsRouteRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+  AuthenticatedPgAdminMerchantsRoute: AuthenticatedPgAdminMerchantsRoute,
+  AuthenticatedPgAdminPaymentModesRoute: AuthenticatedPgAdminPaymentModesRoute,
+  AuthenticatedPgAdminSubscribersRoute: AuthenticatedPgAdminSubscribersRoute,
+  AuthenticatedPgAdminVendorsRoute: AuthenticatedPgAdminVendorsRoute,
   AuthenticatedAppsIndexRoute: AuthenticatedAppsIndexRoute,
   AuthenticatedBbpsFileuploadIndexRoute: AuthenticatedBbpsFileuploadIndexRoute,
   AuthenticatedBbpsIndexRoute: AuthenticatedBbpsIndexRoute,
@@ -627,6 +727,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedUpianalyticsIndexRoute: AuthenticatedUpianalyticsIndexRoute,
   AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
   AuthenticatedWealthIfaIndexRoute: AuthenticatedWealthIfaIndexRoute,
+  AuthenticatedPgAdminRoutesSidRoute: AuthenticatedPgAdminRoutesSidRoute,
+  AuthenticatedPgAdminSpmcSidRoute: AuthenticatedPgAdminSpmcSidRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -691,6 +793,10 @@ export interface FileRoutesByFullPath {
   '/500': typeof errors500Route
   '/503': typeof errors503Route
   '/': typeof AuthenticatedIndexRoute
+  '/pg-admin/merchants': typeof AuthenticatedPgAdminMerchantsRoute
+  '/pg-admin/payment-modes': typeof AuthenticatedPgAdminPaymentModesRoute
+  '/pg-admin/subscribers': typeof AuthenticatedPgAdminSubscribersRoute
+  '/pg-admin/vendors': typeof AuthenticatedPgAdminVendorsRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayRoute
@@ -713,6 +819,8 @@ export interface FileRoutesByFullPath {
   '/upi_analytics': typeof AuthenticatedUpianalyticsIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
   '/wealth-ifa': typeof AuthenticatedWealthIfaIndexRoute
+  '/pg-admin/routes/$sid': typeof AuthenticatedPgAdminRoutesSidRoute
+  '/pg-admin/spmc/$sid': typeof AuthenticatedPgAdminSpmcSidRoute
 }
 
 export interface FileRoutesByTo {
@@ -728,6 +836,10 @@ export interface FileRoutesByTo {
   '/500': typeof errors500Route
   '/503': typeof errors503Route
   '/': typeof AuthenticatedIndexRoute
+  '/pg-admin/merchants': typeof AuthenticatedPgAdminMerchantsRoute
+  '/pg-admin/payment-modes': typeof AuthenticatedPgAdminPaymentModesRoute
+  '/pg-admin/subscribers': typeof AuthenticatedPgAdminSubscribersRoute
+  '/pg-admin/vendors': typeof AuthenticatedPgAdminVendorsRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayRoute
@@ -750,6 +862,8 @@ export interface FileRoutesByTo {
   '/upi_analytics': typeof AuthenticatedUpianalyticsIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
   '/wealth-ifa': typeof AuthenticatedWealthIfaIndexRoute
+  '/pg-admin/routes/$sid': typeof AuthenticatedPgAdminRoutesSidRoute
+  '/pg-admin/spmc/$sid': typeof AuthenticatedPgAdminSpmcSidRoute
 }
 
 export interface FileRoutesById {
@@ -770,6 +884,10 @@ export interface FileRoutesById {
   '/(errors)/500': typeof errors500Route
   '/(errors)/503': typeof errors503Route
   '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/_authenticated/pg-admin/merchants': typeof AuthenticatedPgAdminMerchantsRoute
+  '/_authenticated/pg-admin/payment-modes': typeof AuthenticatedPgAdminPaymentModesRoute
+  '/_authenticated/pg-admin/subscribers': typeof AuthenticatedPgAdminSubscribersRoute
+  '/_authenticated/pg-admin/vendors': typeof AuthenticatedPgAdminVendorsRoute
   '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/_authenticated/settings/display': typeof AuthenticatedSettingsDisplayRoute
@@ -792,6 +910,8 @@ export interface FileRoutesById {
   '/_authenticated/upi_analytics/': typeof AuthenticatedUpianalyticsIndexRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
   '/_authenticated/wealth-ifa/': typeof AuthenticatedWealthIfaIndexRoute
+  '/_authenticated/pg-admin/routes/$sid': typeof AuthenticatedPgAdminRoutesSidRoute
+  '/_authenticated/pg-admin/spmc/$sid': typeof AuthenticatedPgAdminSpmcSidRoute
 }
 
 export interface FileRouteTypes {
@@ -812,6 +932,10 @@ export interface FileRouteTypes {
     | '/500'
     | '/503'
     | '/'
+    | '/pg-admin/merchants'
+    | '/pg-admin/payment-modes'
+    | '/pg-admin/subscribers'
+    | '/pg-admin/vendors'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
@@ -834,6 +958,8 @@ export interface FileRouteTypes {
     | '/upi_analytics'
     | '/users'
     | '/wealth-ifa'
+    | '/pg-admin/routes/$sid'
+    | '/pg-admin/spmc/$sid'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/clerk'
@@ -848,6 +974,10 @@ export interface FileRouteTypes {
     | '/500'
     | '/503'
     | '/'
+    | '/pg-admin/merchants'
+    | '/pg-admin/payment-modes'
+    | '/pg-admin/subscribers'
+    | '/pg-admin/vendors'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
@@ -870,6 +1000,8 @@ export interface FileRouteTypes {
     | '/upi_analytics'
     | '/users'
     | '/wealth-ifa'
+    | '/pg-admin/routes/$sid'
+    | '/pg-admin/spmc/$sid'
   id:
     | '__root__'
     | '/_authenticated'
@@ -888,6 +1020,10 @@ export interface FileRouteTypes {
     | '/(errors)/500'
     | '/(errors)/503'
     | '/_authenticated/'
+    | '/_authenticated/pg-admin/merchants'
+    | '/_authenticated/pg-admin/payment-modes'
+    | '/_authenticated/pg-admin/subscribers'
+    | '/_authenticated/pg-admin/vendors'
     | '/_authenticated/settings/account'
     | '/_authenticated/settings/appearance'
     | '/_authenticated/settings/display'
@@ -910,6 +1046,8 @@ export interface FileRouteTypes {
     | '/_authenticated/upi_analytics/'
     | '/_authenticated/users/'
     | '/_authenticated/wealth-ifa/'
+    | '/_authenticated/pg-admin/routes/$sid'
+    | '/_authenticated/pg-admin/spmc/$sid'
   fileRoutesById: FileRoutesById
 }
 
@@ -972,6 +1110,10 @@ export const routeTree = rootRoute
       "children": [
         "/_authenticated/settings",
         "/_authenticated/",
+        "/_authenticated/pg-admin/merchants",
+        "/_authenticated/pg-admin/payment-modes",
+        "/_authenticated/pg-admin/subscribers",
+        "/_authenticated/pg-admin/vendors",
         "/_authenticated/apps/",
         "/_authenticated/bbps-fileupload/",
         "/_authenticated/bbps/",
@@ -985,7 +1127,9 @@ export const routeTree = rootRoute
         "/_authenticated/upi/",
         "/_authenticated/upi_analytics/",
         "/_authenticated/users/",
-        "/_authenticated/wealth-ifa/"
+        "/_authenticated/wealth-ifa/",
+        "/_authenticated/pg-admin/routes/$sid",
+        "/_authenticated/pg-admin/spmc/$sid"
       ]
     },
     "/clerk": {
@@ -1053,6 +1197,22 @@ export const routeTree = rootRoute
     },
     "/_authenticated/": {
       "filePath": "_authenticated/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/pg-admin/merchants": {
+      "filePath": "_authenticated/pg-admin/merchants.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/pg-admin/payment-modes": {
+      "filePath": "_authenticated/pg-admin/payment-modes.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/pg-admin/subscribers": {
+      "filePath": "_authenticated/pg-admin/subscribers.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/pg-admin/vendors": {
+      "filePath": "_authenticated/pg-admin/vendors.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/settings/account": {
@@ -1141,6 +1301,14 @@ export const routeTree = rootRoute
     },
     "/_authenticated/wealth-ifa/": {
       "filePath": "_authenticated/wealth-ifa/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/pg-admin/routes/$sid": {
+      "filePath": "_authenticated/pg-admin/routes.$sid.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/pg-admin/spmc/$sid": {
+      "filePath": "_authenticated/pg-admin/spmc.$sid.tsx",
       "parent": "/_authenticated"
     }
   }
