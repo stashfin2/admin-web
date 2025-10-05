@@ -21,7 +21,14 @@ export function useMerchantsList(params: {
 }) {
   return useQuery({
     queryKey: MK.list(params),
-    queryFn: async () => (await listMerchants(params)).data
+    queryFn: async () => {
+      const response = (await listMerchants(params)).data
+      // Map API response structure to expected UI structure
+      return {
+        content: response.items || [],
+        meta: response.page || { number: 1, size: 20, total_elements: 0, total_pages: 0 }
+      }
+    }
   })
 }
 

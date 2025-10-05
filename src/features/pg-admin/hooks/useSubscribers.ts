@@ -20,7 +20,14 @@ export function useSubscribersList(params: {
 }) {
   return useQuery({
     queryKey: SK.list(params),
-    queryFn: async () => (await listSubscribers(params)).data
+    queryFn: async () => {
+      const response = (await listSubscribers(params)).data
+      // Map API response structure to expected UI structure
+      return {
+        content: response.items || [],
+        meta: response.page || { number: 1, size: 20, total_elements: 0, total_pages: 0 }
+      }
+    }
   })
 }
 

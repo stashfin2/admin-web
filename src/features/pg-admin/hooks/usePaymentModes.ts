@@ -13,7 +13,14 @@ export function usePaymentModesList(params: {
 }) {
   return useQuery({
     queryKey: PMK.list(params),
-    queryFn: async () => (await listPaymentModes(params)).data
+    queryFn: async () => {
+      const response = (await listPaymentModes(params)).data
+      // Map API response structure to expected UI structure
+      return {
+        content: response.items || [],
+        meta: response.page || { number: 1, size: 20, total_elements: 0, total_pages: 0 }
+      }
+    }
   })
 }
 
