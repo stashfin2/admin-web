@@ -499,10 +499,10 @@ function MerchantsPage() {
         </div>
 
         {/* Pagination */}
-        {data?.total_pages && data.total_pages > 1 && (
+        {data?.meta?.total_pages && data.meta.total_pages > 1 && (
           <div className="mt-6 flex items-center justify-between">
             <div className="text-sm text-muted-foreground">
-              Showing {((filters.page - 1) * filters.size) + 1} to {Math.min(filters.page * filters.size, data.total_elements)} of {data.total_elements} merchants
+              Showing {((filters.page - 1) * filters.size) + 1} to {Math.min(filters.page * filters.size, data.meta.total_elements)} of {data.meta.total_elements} merchants
             </div>
             <div className="flex gap-2">
               <Button
@@ -513,10 +513,13 @@ function MerchantsPage() {
               >
                 Previous
               </Button>
+              <span className="px-3 py-2 text-sm">
+                Page {filters.page} of {data.meta.total_pages}
+              </span>
               <Button
                 variant="outline"
                 size="sm"
-                disabled={filters.page >= data.total_pages}
+                disabled={filters.page >= data.meta.total_pages}
                 onClick={() => setFilters(prev => ({ ...prev, page: prev.page + 1 }))}
               >
                 Next
