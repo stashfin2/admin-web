@@ -14,7 +14,12 @@ export function usePaymentModesList(params: {
   return useQuery({
     queryKey: PMK.list(params),
     queryFn: async () => {
-      const response = (await listPaymentModes(params)).data
+      // Convert "all" to undefined for API calls
+      const apiParams = {
+        ...params,
+        category: params.category === 'all' ? undefined : params.category
+      }
+      const response = (await listPaymentModes(apiParams)).data
       // Map API response structure to expected UI structure
       return {
         content: response.items || [],

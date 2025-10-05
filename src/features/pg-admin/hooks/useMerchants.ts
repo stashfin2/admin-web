@@ -22,7 +22,14 @@ export function useMerchantsList(params: {
   return useQuery({
     queryKey: MK.list(params),
     queryFn: async () => {
-      const response = (await listMerchants(params)).data
+      // Convert "all" to undefined for API calls
+      const apiParams = {
+        ...params,
+        vendor_id: params.vendor_id || undefined,
+        status: params.status === 'all' ? undefined : params.status,
+        merchant_ref: params.merchant_ref || undefined
+      }
+      const response = (await listMerchants(apiParams)).data
       // Map API response structure to expected UI structure
       return {
         content: response.items || [],
