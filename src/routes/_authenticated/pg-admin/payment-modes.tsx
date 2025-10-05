@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
-import { ColumnDef } from '@tanstack/react-table'
+import { ColumnDef, useReactTable, getCoreRowModel, flexRender } from '@tanstack/react-table'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
@@ -36,7 +36,7 @@ import { Badge } from '@/components/ui/badge'
 import { usePaymentModesList, usePaymentMode } from '@/features/pg-admin/hooks/usePaymentModes'
 import { EmptyState } from '@/features/pg-admin/components/EmptyState'
 import { PaymentMode } from '@/features/pg-admin/types'
-import { getColumnKey, renderCell } from '@/features/pg-admin/utils/tableUtils'
+// import { getColumnKey, renderCell } from '@/features/pg-admin/utils/tableUtils'
 import { Copy, Eye } from 'lucide-react'
 import { toast } from 'sonner'
 
@@ -194,6 +194,12 @@ function PaymentModesPage() {
     }
   ]
 
+  const table = useReactTable({
+    data: data?.content || [],
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+  })
+
   return (
     <div>
       <Header>
@@ -243,13 +249,15 @@ function PaymentModesPage() {
         <div className="rounded-md border">
           <Table>
             <TableHeader>
-              <TableRow>
-                {columns.map((column) => (
-                  <TableHead key={getColumnKey(column)}>
-                    {typeof column.header === 'string' ? column.header : 'Actions'}
-                  </TableHead>
-                ))}
-              </TableRow>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => (
+                    <TableHead key={header.id}>
+                      {flexRender(header.column.columnDef.header, header.getContext())}
+                    </TableHead>
+                  ))}
+                </TableRow>
+              ))}
             </TableHeader>
             <TableBody>
               {isLoading ? (
@@ -274,14 +282,11 @@ function PaymentModesPage() {
                   </TableCell>
                 </TableRow>
               ) : (
-                data.content.map((mode: PaymentMode) => (
-                  <TableRow key={mode.id}>
-                    {columns.map((column) => (
-                      <TableCell key={getColumnKey(column)}>
-                        {renderCell(column, { 
-                          original: mode, 
-                          getValue: (key: string) => mode[key as keyof PaymentMode] 
-                        })}
+                table.getRowModel().rows.map((row) => (
+                  <TableRow key={row.id}>
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </TableCell>
                     ))}
                   </TableRow>
