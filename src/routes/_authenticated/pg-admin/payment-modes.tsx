@@ -124,18 +124,14 @@ function PaymentModeDetailsDrawer({
 
 function PaymentModesPage() {
   const [filters, setFilters] = useState({
-    category: '',
+    category: 'all',
     page: 1,
     size: 20
   })
   const [detailsDrawerOpen, setDetailsDrawerOpen] = useState(false)
   const [selectedModeId, setSelectedModeId] = useState<number | null>(null)
 
-  const { data, isLoading, error } = usePaymentModesList({
-    category: filters.category || undefined,
-    page: filters.page,
-    size: filters.size
-  })
+  const { data, isLoading, error } = usePaymentModesList(filters)
 
   // Extract unique categories for filter
   const categories = Array.from(
@@ -232,7 +228,7 @@ function PaymentModesPage() {
                 <SelectValue placeholder="All categories" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All categories</SelectItem>
+                <SelectItem value="all">All categories</SelectItem>
                 {categories.map((category: string) => (
                   <SelectItem key={category} value={category}>
                     {category}

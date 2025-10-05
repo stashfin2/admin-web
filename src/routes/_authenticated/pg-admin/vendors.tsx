@@ -150,7 +150,7 @@ function VendorFormDrawer({
 
 function VendorsPage() {
   const [filters, setFilters] = useState({
-    status: '',
+    status: 'all',
     code: '',
     page: 1,
     size: 20
@@ -278,7 +278,7 @@ function VendorsPage() {
                 <SelectValue placeholder="All statuses" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All statuses</SelectItem>
+                <SelectItem value="all">All statuses</SelectItem>
                 <SelectItem value="ACTIVE">Active</SelectItem>
                 <SelectItem value="INACTIVE">Inactive</SelectItem>
                 <SelectItem value="DEPRECATED">Deprecated</SelectItem>

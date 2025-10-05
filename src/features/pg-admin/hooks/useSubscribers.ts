@@ -21,7 +21,13 @@ export function useSubscribersList(params: {
   return useQuery({
     queryKey: SK.list(params),
     queryFn: async () => {
-      const response = (await listSubscribers(params)).data
+      // Convert "all" to undefined for API calls
+      const apiParams = {
+        ...params,
+        status: params.status === 'all' ? undefined : params.status,
+        query: params.query || undefined
+      }
+      const response = (await listSubscribers(apiParams)).data
       // Map API response structure to expected UI structure
       return {
         content: response.items || [],
