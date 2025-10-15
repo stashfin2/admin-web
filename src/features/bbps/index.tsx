@@ -110,6 +110,7 @@ export default function BBPS() {
       txn_error_msg: String(t.txm_error_msg ?? ''),
       status_error_code: String(t.status_error_code ?? ''),
       status_error_msg: String(t.status_error_msg ?? ''),
+      download_order_details: String(t.download_order_details ?? ''),
     }
   })
 
