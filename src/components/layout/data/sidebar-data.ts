@@ -23,7 +23,9 @@ import {
   IconMoneybag,
   IconReceiptRupee,
   IconDevicesCheck,
-  IconTrendingUp
+  IconTrendingUp,
+  IconSettings,
+  IconRoute
 } from '@tabler/icons-react'
 import { Command } from 'lucide-react'
 // import { ClerkLogo } from '@/assets/clerk-logo'
@@ -104,6 +106,31 @@ export const sidebarData: SidebarData = {
          }
         
         // Clerk links removed
+      ],
+    },
+    {
+      title: 'Payment Gateway Admin',
+      items: [
+        {
+          title: 'Vendors',
+          url: '/pg-admin/vendors',
+          icon: IconSettings,
+        },
+        {
+          title: 'Merchants',
+          url: '/pg-admin/merchants',
+          icon: IconMoneybag,
+        },
+        {
+          title: 'Payment Modes',
+          url: '/pg-admin/payment-modes',
+          icon: IconRoute,
+        },
+        {
+          title: 'Subscribers',
+          url: '/pg-admin/subscribers',
+          icon: IconUsersGroup,
+        },
       ],
     },
     /****REMOVED FROM SIDE BAR IN UI , BUT LINK STILL AVAILABLE */

@@ -88,7 +88,7 @@ export default function BBPS() {
 
   // Defensive mapping
   const mappedData: Transaction[] = (data || []).map((item) => {
-    const t = item as Record<string, unknown>
+    const t = item as unknown as Record<string, unknown>
     return {
       id: String(t.transaction_id ?? ''),
       bbpsReferenceCode: String(t.bbps_ref_no ?? ''),
@@ -105,6 +105,12 @@ export default function BBPS() {
       createdAt: String(t.created_at ?? ''),
       updaredAt: String(t.updated_at ?? ''),
       account_no: String(t.account_no ?? ''),
+      order_id: String(t.order_id ?? ''),
+      txn_error_code: String(t.txn_error_code ?? ''),
+      txn_error_msg: String(t.txm_error_msg ?? ''),
+      status_error_code: String(t.status_error_code ?? ''),
+      status_error_msg: String(t.status_error_msg ?? ''),
+      download_order_details: String(t.download_order_details ?? ''),
     }
   })
 

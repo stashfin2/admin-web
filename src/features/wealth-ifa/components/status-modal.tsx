@@ -1,4 +1,4 @@
-// components/StatusModal.tsx
+ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -8,13 +8,12 @@ import {
   DialogTitle,
   DialogFooter,
 } from '@/components/ui/dialog'
-
-// import { DialogClose } from '@radix-ui/react-dialog'
+import { Input } from '@/components/ui/input'
 
 interface StatusModalProps {
   name: string
   children: React.ReactNode
-  onSubmit: (status: 'approved' | 'rejected') => void
+  onSubmit: (status: 'approved' | 'rejected', reason?: string) => void
 }
 
 export default function StatusModal({
@@ -22,23 +21,44 @@ export default function StatusModal({
   children,
   onSubmit,
 }: StatusModalProps) {
+  const [reason, setReason] = useState('')
+
+  const handleApprove = () => {
+    onSubmit('approved') // no reason needed
+  }
+
+  const handleReject = () => {
+    if (!reason.trim()) {
+      alert('Please provide a reason for rejection.')
+      return
+    }
+    onSubmit('rejected', reason.trim())
+    setReason('') // reset after submit
+  }
+
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className='w-full max-w-xs'>
+      <DialogContent className='w-full max-w-sm'>
         <DialogHeader>
           <DialogTitle>Update Status for {name}</DialogTitle>
         </DialogHeader>
-        <div className='flex flex-col justify-center gap-2 py-4'>
-          <Button onClick={() => onSubmit('approved')}>Approve</Button>
-          <Button onClick={() => onSubmit('rejected')} variant='destructive'>
+
+        {/* Reason Input (only relevant if rejecting) */}
+        <div className='flex flex-col gap-2 py-4'>
+          <label className='text-sm font-medium'>Reason (required if rejecting)</label>
+          <Input
+            placeholder='Enter reason'
+            value={reason}
+            onChange={(e) => setReason(e.target.value)}
+          />
+        </div>
+
+        <DialogFooter className='flex flex-col gap-2'>
+          <Button onClick={handleApprove}>Approve</Button>
+          <Button onClick={handleReject} variant='destructive'>
             Reject
           </Button>
-        </div>
-        <DialogFooter>
-          {/* <DialogClose asChild>
-            <Button variant="outline">Close</Button>
-          </DialogClose> */}
         </DialogFooter>
       </DialogContent>
     </Dialog>

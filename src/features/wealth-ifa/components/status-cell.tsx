@@ -26,29 +26,31 @@ export function StatusCell({ data, searchParams, pageIndex }: StatusCellProps) {
     return <span className='capitalize'>{data.status}</span>
   }
 
-  const handleSubmit = async (newStatus: 'approved' | 'rejected') => {
-    try {
-      const token = getToken()
-      await axios.post(
-        `${import.meta.env.VITE_BACKEND_BASE_URL}/v1/wealth/ifa/update-user`,
-        {
-          customerId: data.customerId,
-          status: newStatus,
+  const handleSubmit = async (newStatus: 'approved' | 'rejected', reason?: string) => {
+  try {
+    const token = getToken()
+    await axios.post(
+      `${import.meta.env.VITE_BACKEND_BASE_URL}/v1/wealth/ifa/update-user`,
+      {
+        customerId: data.customerId,
+        status: newStatus,
+        ...(newStatus === 'rejected' && { reason }), // include reason only if rejected
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      alert(`Status updated to ${newStatus}`)
-      queryClient.invalidateQueries({
-        queryKey: ['wealth-ifa', searchParams, pageIndex],
-      })
-    } catch (error) {
-      alert(`Failed to update status: ${error}`)
-    }
+      }
+    )
+    alert(`Status updated to ${newStatus}`)
+    queryClient.invalidateQueries({
+      queryKey: ['wealth-ifa', searchParams, pageIndex],
+    })
+  } catch (error) {
+    alert(`Failed to update status: ${error}`)
   }
+}
+
 
   return (
     <StatusModal name={data.name} onSubmit={handleSubmit}>
