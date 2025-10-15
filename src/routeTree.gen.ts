@@ -8,675 +8,250 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as ClerkRouteRouteImport } from './routes/clerk/route'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as errors503RouteImport } from './routes/(errors)/503'
+import { Route as errors500RouteImport } from './routes/(errors)/500'
+import { Route as errors404RouteImport } from './routes/(errors)/404'
+import { Route as errors403RouteImport } from './routes/(errors)/403'
+import { Route as errors401RouteImport } from './routes/(errors)/401'
+import { Route as authSignUpRouteImport } from './routes/(auth)/sign-up'
+import { Route as authSignIn2RouteImport } from './routes/(auth)/sign-in-2'
+import { Route as authSignInRouteImport } from './routes/(auth)/sign-in'
+import { Route as authOtpRouteImport } from './routes/(auth)/otp'
+import { Route as authForgotPasswordRouteImport } from './routes/(auth)/forgot-password'
+import { Route as ClerkAuthenticatedRouteRouteImport } from './routes/clerk/_authenticated/route'
+import { Route as ClerkauthRouteRouteImport } from './routes/clerk/(auth)/route'
+import { Route as AuthenticatedSettingsRouteRouteImport } from './routes/_authenticated/settings/route'
+import { Route as AuthenticatedWealthIfaIndexRouteImport } from './routes/_authenticated/wealth-ifa/index'
+import { Route as AuthenticatedUsersIndexRouteImport } from './routes/_authenticated/users/index'
+import { Route as AuthenticatedUpi_analyticsIndexRouteImport } from './routes/_authenticated/upi_analytics/index'
+import { Route as AuthenticatedUpiIndexRouteImport } from './routes/_authenticated/upi/index'
+import { Route as AuthenticatedTasksIndexRouteImport } from './routes/_authenticated/tasks/index'
+import { Route as AuthenticatedSettingsIndexRouteImport } from './routes/_authenticated/settings/index'
+import { Route as AuthenticatedHelpCenterIndexRouteImport } from './routes/_authenticated/help-center/index'
+import { Route as AuthenticatedCustomersIndexRouteImport } from './routes/_authenticated/customers/index'
+import { Route as AuthenticatedCreditRepairIndexRouteImport } from './routes/_authenticated/credit-repair/index'
+import { Route as AuthenticatedChatsIndexRouteImport } from './routes/_authenticated/chats/index'
+import { Route as AuthenticatedBureauIndexRouteImport } from './routes/_authenticated/bureau/index'
+import { Route as AuthenticatedBureauConsentIndexRouteImport } from './routes/_authenticated/bureau-consent/index'
+import { Route as AuthenticatedBbpsIndexRouteImport } from './routes/_authenticated/bbps/index'
+import { Route as AuthenticatedBbpsFileuploadIndexRouteImport } from './routes/_authenticated/bbps-fileupload/index'
+import { Route as AuthenticatedAppsIndexRouteImport } from './routes/_authenticated/apps/index'
+import { Route as ClerkAuthenticatedUserManagementRouteImport } from './routes/clerk/_authenticated/user-management'
+import { Route as ClerkauthSignUpRouteImport } from './routes/clerk/(auth)/sign-up'
+import { Route as ClerkauthSignInRouteImport } from './routes/clerk/(auth)/sign-in'
+import { Route as AuthenticatedSettingsNotificationsRouteImport } from './routes/_authenticated/settings/notifications'
+import { Route as AuthenticatedSettingsDisplayRouteImport } from './routes/_authenticated/settings/display'
+import { Route as AuthenticatedSettingsAppearanceRouteImport } from './routes/_authenticated/settings/appearance'
+import { Route as AuthenticatedSettingsAccountRouteImport } from './routes/_authenticated/settings/account'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as ClerkRouteImport } from './routes/clerk/route'
-import { Route as AuthenticatedRouteImport } from './routes/_authenticated/route'
-import { Route as AuthenticatedIndexImport } from './routes/_authenticated/index'
-import { Route as errors503Import } from './routes/(errors)/503'
-import { Route as errors500Import } from './routes/(errors)/500'
-import { Route as errors404Import } from './routes/(errors)/404'
-import { Route as errors403Import } from './routes/(errors)/403'
-import { Route as errors401Import } from './routes/(errors)/401'
-import { Route as authSignUpImport } from './routes/(auth)/sign-up'
-import { Route as authSignIn2Import } from './routes/(auth)/sign-in-2'
-import { Route as authSignInImport } from './routes/(auth)/sign-in'
-import { Route as authOtpImport } from './routes/(auth)/otp'
-import { Route as authForgotPasswordImport } from './routes/(auth)/forgot-password'
-import { Route as ClerkAuthenticatedRouteImport } from './routes/clerk/_authenticated/route'
-import { Route as ClerkauthRouteImport } from './routes/clerk/(auth)/route'
-import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings/route'
-import { Route as AuthenticatedWealthIfaIndexImport } from './routes/_authenticated/wealth-ifa/index'
-import { Route as AuthenticatedUsersIndexImport } from './routes/_authenticated/users/index'
-import { Route as AuthenticatedUpianalyticsIndexImport } from './routes/_authenticated/upi_analytics/index'
-import { Route as AuthenticatedUpiIndexImport } from './routes/_authenticated/upi/index'
-import { Route as AuthenticatedTasksIndexImport } from './routes/_authenticated/tasks/index'
-import { Route as AuthenticatedSettingsIndexImport } from './routes/_authenticated/settings/index'
-import { Route as AuthenticatedHelpCenterIndexImport } from './routes/_authenticated/help-center/index'
-import { Route as AuthenticatedCustomersIndexImport } from './routes/_authenticated/customers/index'
-import { Route as AuthenticatedCreditRepairIndexImport } from './routes/_authenticated/credit-repair/index'
-import { Route as AuthenticatedChatsIndexImport } from './routes/_authenticated/chats/index'
-import { Route as AuthenticatedBureauIndexImport } from './routes/_authenticated/bureau/index'
-import { Route as AuthenticatedBureauConsentIndexImport } from './routes/_authenticated/bureau-consent/index'
-import { Route as AuthenticatedBbpsIndexImport } from './routes/_authenticated/bbps/index'
-import { Route as AuthenticatedBbpsFileuploadIndexImport } from './routes/_authenticated/bbps-fileupload/index'
-import { Route as AuthenticatedAppsIndexImport } from './routes/_authenticated/apps/index'
-import { Route as ClerkAuthenticatedUserManagementImport } from './routes/clerk/_authenticated/user-management'
-import { Route as ClerkauthSignUpImport } from './routes/clerk/(auth)/sign-up'
-import { Route as ClerkauthSignInImport } from './routes/clerk/(auth)/sign-in'
-import { Route as AuthenticatedSettingsNotificationsImport } from './routes/_authenticated/settings/notifications'
-import { Route as AuthenticatedSettingsDisplayImport } from './routes/_authenticated/settings/display'
-import { Route as AuthenticatedSettingsAppearanceImport } from './routes/_authenticated/settings/appearance'
-import { Route as AuthenticatedSettingsAccountImport } from './routes/_authenticated/settings/account'
-
-// Create/Update Routes
-
-const ClerkRouteRoute = ClerkRouteImport.update({
+const ClerkRouteRoute = ClerkRouteRouteImport.update({
   id: '/clerk',
   path: '/clerk',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AuthenticatedRouteRoute = AuthenticatedRouteImport.update({
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AuthenticatedIndexRoute = AuthenticatedIndexImport.update({
+const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-
-const errors503Route = errors503Import.update({
+const errors503Route = errors503RouteImport.update({
   id: '/(errors)/503',
   path: '/503',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const errors500Route = errors500Import.update({
+const errors500Route = errors500RouteImport.update({
   id: '/(errors)/500',
   path: '/500',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const errors404Route = errors404Import.update({
+const errors404Route = errors404RouteImport.update({
   id: '/(errors)/404',
   path: '/404',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const errors403Route = errors403Import.update({
+const errors403Route = errors403RouteImport.update({
   id: '/(errors)/403',
   path: '/403',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const errors401Route = errors401Import.update({
+const errors401Route = errors401RouteImport.update({
   id: '/(errors)/401',
   path: '/401',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const authSignUpRoute = authSignUpImport.update({
+const authSignUpRoute = authSignUpRouteImport.update({
   id: '/(auth)/sign-up',
   path: '/sign-up',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const authSignIn2Route = authSignIn2Import.update({
+const authSignIn2Route = authSignIn2RouteImport.update({
   id: '/(auth)/sign-in-2',
   path: '/sign-in-2',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const authSignInRoute = authSignInImport.update({
+const authSignInRoute = authSignInRouteImport.update({
   id: '/(auth)/sign-in',
   path: '/sign-in',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const authOtpRoute = authOtpImport.update({
+const authOtpRoute = authOtpRouteImport.update({
   id: '/(auth)/otp',
   path: '/otp',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const authForgotPasswordRoute = authForgotPasswordImport.update({
+const authForgotPasswordRoute = authForgotPasswordRouteImport.update({
   id: '/(auth)/forgot-password',
   path: '/forgot-password',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const ClerkAuthenticatedRouteRoute = ClerkAuthenticatedRouteImport.update({
+const ClerkAuthenticatedRouteRoute = ClerkAuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
   getParentRoute: () => ClerkRouteRoute,
 } as any)
-
-const ClerkauthRouteRoute = ClerkauthRouteImport.update({
+const ClerkauthRouteRoute = ClerkauthRouteRouteImport.update({
   id: '/(auth)',
   getParentRoute: () => ClerkRouteRoute,
 } as any)
-
-const AuthenticatedSettingsRouteRoute = AuthenticatedSettingsRouteImport.update(
-  {
+const AuthenticatedSettingsRouteRoute =
+  AuthenticatedSettingsRouteRouteImport.update({
     id: '/settings',
     path: '/settings',
     getParentRoute: () => AuthenticatedRouteRoute,
-  } as any,
-)
-
+  } as any)
 const AuthenticatedWealthIfaIndexRoute =
-  AuthenticatedWealthIfaIndexImport.update({
+  AuthenticatedWealthIfaIndexRouteImport.update({
     id: '/wealth-ifa/',
     path: '/wealth-ifa/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-
-const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexImport.update({
+const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexRouteImport.update({
   id: '/users/',
   path: '/users/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-
-const AuthenticatedUpianalyticsIndexRoute =
-  AuthenticatedUpianalyticsIndexImport.update({
+const AuthenticatedUpi_analyticsIndexRoute =
+  AuthenticatedUpi_analyticsIndexRouteImport.update({
     id: '/upi_analytics/',
     path: '/upi_analytics/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-
-const AuthenticatedUpiIndexRoute = AuthenticatedUpiIndexImport.update({
+const AuthenticatedUpiIndexRoute = AuthenticatedUpiIndexRouteImport.update({
   id: '/upi/',
   path: '/upi/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-
-const AuthenticatedTasksIndexRoute = AuthenticatedTasksIndexImport.update({
+const AuthenticatedTasksIndexRoute = AuthenticatedTasksIndexRouteImport.update({
   id: '/tasks/',
   path: '/tasks/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-
-const AuthenticatedSettingsIndexRoute = AuthenticatedSettingsIndexImport.update(
-  {
+const AuthenticatedSettingsIndexRoute =
+  AuthenticatedSettingsIndexRouteImport.update({
     id: '/',
     path: '/',
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
-  } as any,
-)
-
+  } as any)
 const AuthenticatedHelpCenterIndexRoute =
-  AuthenticatedHelpCenterIndexImport.update({
+  AuthenticatedHelpCenterIndexRouteImport.update({
     id: '/help-center/',
     path: '/help-center/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-
 const AuthenticatedCustomersIndexRoute =
-  AuthenticatedCustomersIndexImport.update({
+  AuthenticatedCustomersIndexRouteImport.update({
     id: '/customers/',
     path: '/customers/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-
 const AuthenticatedCreditRepairIndexRoute =
-  AuthenticatedCreditRepairIndexImport.update({
+  AuthenticatedCreditRepairIndexRouteImport.update({
     id: '/credit-repair/',
     path: '/credit-repair/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-
-const AuthenticatedChatsIndexRoute = AuthenticatedChatsIndexImport.update({
+const AuthenticatedChatsIndexRoute = AuthenticatedChatsIndexRouteImport.update({
   id: '/chats/',
   path: '/chats/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-
-const AuthenticatedBureauIndexRoute = AuthenticatedBureauIndexImport.update({
-  id: '/bureau/',
-  path: '/bureau/',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-
+const AuthenticatedBureauIndexRoute =
+  AuthenticatedBureauIndexRouteImport.update({
+    id: '/bureau/',
+    path: '/bureau/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedBureauConsentIndexRoute =
-  AuthenticatedBureauConsentIndexImport.update({
+  AuthenticatedBureauConsentIndexRouteImport.update({
     id: '/bureau-consent/',
     path: '/bureau-consent/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-
-const AuthenticatedBbpsIndexRoute = AuthenticatedBbpsIndexImport.update({
+const AuthenticatedBbpsIndexRoute = AuthenticatedBbpsIndexRouteImport.update({
   id: '/bbps/',
   path: '/bbps/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-
 const AuthenticatedBbpsFileuploadIndexRoute =
-  AuthenticatedBbpsFileuploadIndexImport.update({
+  AuthenticatedBbpsFileuploadIndexRouteImport.update({
     id: '/bbps-fileupload/',
     path: '/bbps-fileupload/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-
-const AuthenticatedAppsIndexRoute = AuthenticatedAppsIndexImport.update({
+const AuthenticatedAppsIndexRoute = AuthenticatedAppsIndexRouteImport.update({
   id: '/apps/',
   path: '/apps/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-
 const ClerkAuthenticatedUserManagementRoute =
-  ClerkAuthenticatedUserManagementImport.update({
+  ClerkAuthenticatedUserManagementRouteImport.update({
     id: '/user-management',
     path: '/user-management',
     getParentRoute: () => ClerkAuthenticatedRouteRoute,
   } as any)
-
-const ClerkauthSignUpRoute = ClerkauthSignUpImport.update({
+const ClerkauthSignUpRoute = ClerkauthSignUpRouteImport.update({
   id: '/sign-up',
   path: '/sign-up',
   getParentRoute: () => ClerkauthRouteRoute,
 } as any)
-
-const ClerkauthSignInRoute = ClerkauthSignInImport.update({
+const ClerkauthSignInRoute = ClerkauthSignInRouteImport.update({
   id: '/sign-in',
   path: '/sign-in',
   getParentRoute: () => ClerkauthRouteRoute,
 } as any)
-
 const AuthenticatedSettingsNotificationsRoute =
-  AuthenticatedSettingsNotificationsImport.update({
+  AuthenticatedSettingsNotificationsRouteImport.update({
     id: '/notifications',
     path: '/notifications',
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
   } as any)
-
 const AuthenticatedSettingsDisplayRoute =
-  AuthenticatedSettingsDisplayImport.update({
+  AuthenticatedSettingsDisplayRouteImport.update({
     id: '/display',
     path: '/display',
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
   } as any)
-
 const AuthenticatedSettingsAppearanceRoute =
-  AuthenticatedSettingsAppearanceImport.update({
+  AuthenticatedSettingsAppearanceRouteImport.update({
     id: '/appearance',
     path: '/appearance',
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
   } as any)
-
 const AuthenticatedSettingsAccountRoute =
-  AuthenticatedSettingsAccountImport.update({
+  AuthenticatedSettingsAccountRouteImport.update({
     id: '/account',
     path: '/account',
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
   } as any)
 
-// Populate the FileRoutesByPath interface
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/_authenticated': {
-      id: '/_authenticated'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof AuthenticatedRouteImport
-      parentRoute: typeof rootRoute
-    }
-    '/clerk': {
-      id: '/clerk'
-      path: '/clerk'
-      fullPath: '/clerk'
-      preLoaderRoute: typeof ClerkRouteImport
-      parentRoute: typeof rootRoute
-    }
-    '/_authenticated/settings': {
-      id: '/_authenticated/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/clerk/(auth)': {
-      id: '/clerk/(auth)'
-      path: '/'
-      fullPath: '/clerk/'
-      preLoaderRoute: typeof ClerkauthRouteImport
-      parentRoute: typeof ClerkRouteImport
-    }
-    '/clerk/_authenticated': {
-      id: '/clerk/_authenticated'
-      path: ''
-      fullPath: '/clerk'
-      preLoaderRoute: typeof ClerkAuthenticatedRouteImport
-      parentRoute: typeof ClerkRouteImport
-    }
-    '/(auth)/forgot-password': {
-      id: '/(auth)/forgot-password'
-      path: '/forgot-password'
-      fullPath: '/forgot-password'
-      preLoaderRoute: typeof authForgotPasswordImport
-      parentRoute: typeof rootRoute
-    }
-    '/(auth)/otp': {
-      id: '/(auth)/otp'
-      path: '/otp'
-      fullPath: '/otp'
-      preLoaderRoute: typeof authOtpImport
-      parentRoute: typeof rootRoute
-    }
-    '/(auth)/sign-in': {
-      id: '/(auth)/sign-in'
-      path: '/sign-in'
-      fullPath: '/sign-in'
-      preLoaderRoute: typeof authSignInImport
-      parentRoute: typeof rootRoute
-    }
-    '/(auth)/sign-in-2': {
-      id: '/(auth)/sign-in-2'
-      path: '/sign-in-2'
-      fullPath: '/sign-in-2'
-      preLoaderRoute: typeof authSignIn2Import
-      parentRoute: typeof rootRoute
-    }
-    '/(auth)/sign-up': {
-      id: '/(auth)/sign-up'
-      path: '/sign-up'
-      fullPath: '/sign-up'
-      preLoaderRoute: typeof authSignUpImport
-      parentRoute: typeof rootRoute
-    }
-    '/(errors)/401': {
-      id: '/(errors)/401'
-      path: '/401'
-      fullPath: '/401'
-      preLoaderRoute: typeof errors401Import
-      parentRoute: typeof rootRoute
-    }
-    '/(errors)/403': {
-      id: '/(errors)/403'
-      path: '/403'
-      fullPath: '/403'
-      preLoaderRoute: typeof errors403Import
-      parentRoute: typeof rootRoute
-    }
-    '/(errors)/404': {
-      id: '/(errors)/404'
-      path: '/404'
-      fullPath: '/404'
-      preLoaderRoute: typeof errors404Import
-      parentRoute: typeof rootRoute
-    }
-    '/(errors)/500': {
-      id: '/(errors)/500'
-      path: '/500'
-      fullPath: '/500'
-      preLoaderRoute: typeof errors500Import
-      parentRoute: typeof rootRoute
-    }
-    '/(errors)/503': {
-      id: '/(errors)/503'
-      path: '/503'
-      fullPath: '/503'
-      preLoaderRoute: typeof errors503Import
-      parentRoute: typeof rootRoute
-    }
-    '/_authenticated/': {
-      id: '/_authenticated/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedIndexImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/_authenticated/settings/account': {
-      id: '/_authenticated/settings/account'
-      path: '/account'
-      fullPath: '/settings/account'
-      preLoaderRoute: typeof AuthenticatedSettingsAccountImport
-      parentRoute: typeof AuthenticatedSettingsRouteImport
-    }
-    '/_authenticated/settings/appearance': {
-      id: '/_authenticated/settings/appearance'
-      path: '/appearance'
-      fullPath: '/settings/appearance'
-      preLoaderRoute: typeof AuthenticatedSettingsAppearanceImport
-      parentRoute: typeof AuthenticatedSettingsRouteImport
-    }
-    '/_authenticated/settings/display': {
-      id: '/_authenticated/settings/display'
-      path: '/display'
-      fullPath: '/settings/display'
-      preLoaderRoute: typeof AuthenticatedSettingsDisplayImport
-      parentRoute: typeof AuthenticatedSettingsRouteImport
-    }
-    '/_authenticated/settings/notifications': {
-      id: '/_authenticated/settings/notifications'
-      path: '/notifications'
-      fullPath: '/settings/notifications'
-      preLoaderRoute: typeof AuthenticatedSettingsNotificationsImport
-      parentRoute: typeof AuthenticatedSettingsRouteImport
-    }
-    '/clerk/(auth)/sign-in': {
-      id: '/clerk/(auth)/sign-in'
-      path: '/sign-in'
-      fullPath: '/clerk/sign-in'
-      preLoaderRoute: typeof ClerkauthSignInImport
-      parentRoute: typeof ClerkauthRouteImport
-    }
-    '/clerk/(auth)/sign-up': {
-      id: '/clerk/(auth)/sign-up'
-      path: '/sign-up'
-      fullPath: '/clerk/sign-up'
-      preLoaderRoute: typeof ClerkauthSignUpImport
-      parentRoute: typeof ClerkauthRouteImport
-    }
-    '/clerk/_authenticated/user-management': {
-      id: '/clerk/_authenticated/user-management'
-      path: '/user-management'
-      fullPath: '/clerk/user-management'
-      preLoaderRoute: typeof ClerkAuthenticatedUserManagementImport
-      parentRoute: typeof ClerkAuthenticatedRouteImport
-    }
-    '/_authenticated/apps/': {
-      id: '/_authenticated/apps/'
-      path: '/apps'
-      fullPath: '/apps'
-      preLoaderRoute: typeof AuthenticatedAppsIndexImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/_authenticated/bbps-fileupload/': {
-      id: '/_authenticated/bbps-fileupload/'
-      path: '/bbps-fileupload'
-      fullPath: '/bbps-fileupload'
-      preLoaderRoute: typeof AuthenticatedBbpsFileuploadIndexImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/_authenticated/bbps/': {
-      id: '/_authenticated/bbps/'
-      path: '/bbps'
-      fullPath: '/bbps'
-      preLoaderRoute: typeof AuthenticatedBbpsIndexImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/_authenticated/bureau-consent/': {
-      id: '/_authenticated/bureau-consent/'
-      path: '/bureau-consent'
-      fullPath: '/bureau-consent'
-      preLoaderRoute: typeof AuthenticatedBureauConsentIndexImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/_authenticated/bureau/': {
-      id: '/_authenticated/bureau/'
-      path: '/bureau'
-      fullPath: '/bureau'
-      preLoaderRoute: typeof AuthenticatedBureauIndexImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/_authenticated/chats/': {
-      id: '/_authenticated/chats/'
-      path: '/chats'
-      fullPath: '/chats'
-      preLoaderRoute: typeof AuthenticatedChatsIndexImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/_authenticated/credit-repair/': {
-      id: '/_authenticated/credit-repair/'
-      path: '/credit-repair'
-      fullPath: '/credit-repair'
-      preLoaderRoute: typeof AuthenticatedCreditRepairIndexImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/_authenticated/customers/': {
-      id: '/_authenticated/customers/'
-      path: '/customers'
-      fullPath: '/customers'
-      preLoaderRoute: typeof AuthenticatedCustomersIndexImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/_authenticated/help-center/': {
-      id: '/_authenticated/help-center/'
-      path: '/help-center'
-      fullPath: '/help-center'
-      preLoaderRoute: typeof AuthenticatedHelpCenterIndexImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/_authenticated/settings/': {
-      id: '/_authenticated/settings/'
-      path: '/'
-      fullPath: '/settings/'
-      preLoaderRoute: typeof AuthenticatedSettingsIndexImport
-      parentRoute: typeof AuthenticatedSettingsRouteImport
-    }
-    '/_authenticated/tasks/': {
-      id: '/_authenticated/tasks/'
-      path: '/tasks'
-      fullPath: '/tasks'
-      preLoaderRoute: typeof AuthenticatedTasksIndexImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/_authenticated/upi/': {
-      id: '/_authenticated/upi/'
-      path: '/upi'
-      fullPath: '/upi'
-      preLoaderRoute: typeof AuthenticatedUpiIndexImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/_authenticated/upi_analytics/': {
-      id: '/_authenticated/upi_analytics/'
-      path: '/upi_analytics'
-      fullPath: '/upi_analytics'
-      preLoaderRoute: typeof AuthenticatedUpianalyticsIndexImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/_authenticated/users/': {
-      id: '/_authenticated/users/'
-      path: '/users'
-      fullPath: '/users'
-      preLoaderRoute: typeof AuthenticatedUsersIndexImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/_authenticated/wealth-ifa/': {
-      id: '/_authenticated/wealth-ifa/'
-      path: '/wealth-ifa'
-      fullPath: '/wealth-ifa'
-      preLoaderRoute: typeof AuthenticatedWealthIfaIndexImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-  }
-}
-
-// Create and export the route tree
-
-interface AuthenticatedSettingsRouteRouteChildren {
-  AuthenticatedSettingsAccountRoute: typeof AuthenticatedSettingsAccountRoute
-  AuthenticatedSettingsAppearanceRoute: typeof AuthenticatedSettingsAppearanceRoute
-  AuthenticatedSettingsDisplayRoute: typeof AuthenticatedSettingsDisplayRoute
-  AuthenticatedSettingsNotificationsRoute: typeof AuthenticatedSettingsNotificationsRoute
-  AuthenticatedSettingsIndexRoute: typeof AuthenticatedSettingsIndexRoute
-}
-
-const AuthenticatedSettingsRouteRouteChildren: AuthenticatedSettingsRouteRouteChildren =
-  {
-    AuthenticatedSettingsAccountRoute: AuthenticatedSettingsAccountRoute,
-    AuthenticatedSettingsAppearanceRoute: AuthenticatedSettingsAppearanceRoute,
-    AuthenticatedSettingsDisplayRoute: AuthenticatedSettingsDisplayRoute,
-    AuthenticatedSettingsNotificationsRoute:
-      AuthenticatedSettingsNotificationsRoute,
-    AuthenticatedSettingsIndexRoute: AuthenticatedSettingsIndexRoute,
-  }
-
-const AuthenticatedSettingsRouteRouteWithChildren =
-  AuthenticatedSettingsRouteRoute._addFileChildren(
-    AuthenticatedSettingsRouteRouteChildren,
-  )
-
-interface AuthenticatedRouteRouteChildren {
-  AuthenticatedSettingsRouteRoute: typeof AuthenticatedSettingsRouteRouteWithChildren
-  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
-  AuthenticatedAppsIndexRoute: typeof AuthenticatedAppsIndexRoute
-  AuthenticatedBbpsFileuploadIndexRoute: typeof AuthenticatedBbpsFileuploadIndexRoute
-  AuthenticatedBbpsIndexRoute: typeof AuthenticatedBbpsIndexRoute
-  AuthenticatedBureauConsentIndexRoute: typeof AuthenticatedBureauConsentIndexRoute
-  AuthenticatedBureauIndexRoute: typeof AuthenticatedBureauIndexRoute
-  AuthenticatedChatsIndexRoute: typeof AuthenticatedChatsIndexRoute
-  AuthenticatedCreditRepairIndexRoute: typeof AuthenticatedCreditRepairIndexRoute
-  AuthenticatedCustomersIndexRoute: typeof AuthenticatedCustomersIndexRoute
-  AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
-  AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
-  AuthenticatedUpiIndexRoute: typeof AuthenticatedUpiIndexRoute
-  AuthenticatedUpianalyticsIndexRoute: typeof AuthenticatedUpianalyticsIndexRoute
-  AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
-  AuthenticatedWealthIfaIndexRoute: typeof AuthenticatedWealthIfaIndexRoute
-}
-
-const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedSettingsRouteRoute: AuthenticatedSettingsRouteRouteWithChildren,
-  AuthenticatedIndexRoute: AuthenticatedIndexRoute,
-  AuthenticatedAppsIndexRoute: AuthenticatedAppsIndexRoute,
-  AuthenticatedBbpsFileuploadIndexRoute: AuthenticatedBbpsFileuploadIndexRoute,
-  AuthenticatedBbpsIndexRoute: AuthenticatedBbpsIndexRoute,
-  AuthenticatedBureauConsentIndexRoute: AuthenticatedBureauConsentIndexRoute,
-  AuthenticatedBureauIndexRoute: AuthenticatedBureauIndexRoute,
-  AuthenticatedChatsIndexRoute: AuthenticatedChatsIndexRoute,
-  AuthenticatedCreditRepairIndexRoute: AuthenticatedCreditRepairIndexRoute,
-  AuthenticatedCustomersIndexRoute: AuthenticatedCustomersIndexRoute,
-  AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
-  AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
-  AuthenticatedUpiIndexRoute: AuthenticatedUpiIndexRoute,
-  AuthenticatedUpianalyticsIndexRoute: AuthenticatedUpianalyticsIndexRoute,
-  AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
-  AuthenticatedWealthIfaIndexRoute: AuthenticatedWealthIfaIndexRoute,
-}
-
-const AuthenticatedRouteRouteWithChildren =
-  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
-
-interface ClerkauthRouteRouteChildren {
-  ClerkauthSignInRoute: typeof ClerkauthSignInRoute
-  ClerkauthSignUpRoute: typeof ClerkauthSignUpRoute
-}
-
-const ClerkauthRouteRouteChildren: ClerkauthRouteRouteChildren = {
-  ClerkauthSignInRoute: ClerkauthSignInRoute,
-  ClerkauthSignUpRoute: ClerkauthSignUpRoute,
-}
-
-const ClerkauthRouteRouteWithChildren = ClerkauthRouteRoute._addFileChildren(
-  ClerkauthRouteRouteChildren,
-)
-
-interface ClerkAuthenticatedRouteRouteChildren {
-  ClerkAuthenticatedUserManagementRoute: typeof ClerkAuthenticatedUserManagementRoute
-}
-
-const ClerkAuthenticatedRouteRouteChildren: ClerkAuthenticatedRouteRouteChildren =
-  {
-    ClerkAuthenticatedUserManagementRoute:
-      ClerkAuthenticatedUserManagementRoute,
-  }
-
-const ClerkAuthenticatedRouteRouteWithChildren =
-  ClerkAuthenticatedRouteRoute._addFileChildren(
-    ClerkAuthenticatedRouteRouteChildren,
-  )
-
-interface ClerkRouteRouteChildren {
-  ClerkauthRouteRoute: typeof ClerkauthRouteRouteWithChildren
-  ClerkAuthenticatedRouteRoute: typeof ClerkAuthenticatedRouteRouteWithChildren
-}
-
-const ClerkRouteRouteChildren: ClerkRouteRouteChildren = {
-  ClerkauthRouteRoute: ClerkauthRouteRouteWithChildren,
-  ClerkAuthenticatedRouteRoute: ClerkAuthenticatedRouteRouteWithChildren,
-}
-
-const ClerkRouteRouteWithChildren = ClerkRouteRoute._addFileChildren(
-  ClerkRouteRouteChildren,
-)
-
 export interface FileRoutesByFullPath {
-  '': typeof AuthenticatedRouteRouteWithChildren
   '/clerk': typeof ClerkAuthenticatedRouteRouteWithChildren
   '/settings': typeof AuthenticatedSettingsRouteRouteWithChildren
   '/clerk/': typeof ClerkauthRouteRouteWithChildren
@@ -710,11 +285,10 @@ export interface FileRoutesByFullPath {
   '/settings/': typeof AuthenticatedSettingsIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
   '/upi': typeof AuthenticatedUpiIndexRoute
-  '/upi_analytics': typeof AuthenticatedUpianalyticsIndexRoute
+  '/upi_analytics': typeof AuthenticatedUpi_analyticsIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
   '/wealth-ifa': typeof AuthenticatedWealthIfaIndexRoute
 }
-
 export interface FileRoutesByTo {
   '/clerk': typeof ClerkAuthenticatedRouteRouteWithChildren
   '/forgot-password': typeof authForgotPasswordRoute
@@ -747,13 +321,12 @@ export interface FileRoutesByTo {
   '/settings': typeof AuthenticatedSettingsIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
   '/upi': typeof AuthenticatedUpiIndexRoute
-  '/upi_analytics': typeof AuthenticatedUpianalyticsIndexRoute
+  '/upi_analytics': typeof AuthenticatedUpi_analyticsIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
   '/wealth-ifa': typeof AuthenticatedWealthIfaIndexRoute
 }
-
 export interface FileRoutesById {
-  __root__: typeof rootRoute
+  __root__: typeof rootRouteImport
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/clerk': typeof ClerkRouteRouteWithChildren
   '/_authenticated/settings': typeof AuthenticatedSettingsRouteRouteWithChildren
@@ -789,15 +362,13 @@ export interface FileRoutesById {
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
   '/_authenticated/upi/': typeof AuthenticatedUpiIndexRoute
-  '/_authenticated/upi_analytics/': typeof AuthenticatedUpianalyticsIndexRoute
+  '/_authenticated/upi_analytics/': typeof AuthenticatedUpi_analyticsIndexRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
   '/_authenticated/wealth-ifa/': typeof AuthenticatedWealthIfaIndexRoute
 }
-
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | ''
     | '/clerk'
     | '/settings'
     | '/clerk/'
@@ -912,7 +483,6 @@ export interface FileRouteTypes {
     | '/_authenticated/wealth-ifa/'
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   ClerkRouteRoute: typeof ClerkRouteRouteWithChildren
@@ -928,6 +498,384 @@ export interface RootRouteChildren {
   errors503Route: typeof errors503Route
 }
 
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/clerk': {
+      id: '/clerk'
+      path: '/clerk'
+      fullPath: '/clerk'
+      preLoaderRoute: typeof ClerkRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/': {
+      id: '/_authenticated/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/(errors)/503': {
+      id: '/(errors)/503'
+      path: '/503'
+      fullPath: '/503'
+      preLoaderRoute: typeof errors503RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(errors)/500': {
+      id: '/(errors)/500'
+      path: '/500'
+      fullPath: '/500'
+      preLoaderRoute: typeof errors500RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(errors)/404': {
+      id: '/(errors)/404'
+      path: '/404'
+      fullPath: '/404'
+      preLoaderRoute: typeof errors404RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(errors)/403': {
+      id: '/(errors)/403'
+      path: '/403'
+      fullPath: '/403'
+      preLoaderRoute: typeof errors403RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(errors)/401': {
+      id: '/(errors)/401'
+      path: '/401'
+      fullPath: '/401'
+      preLoaderRoute: typeof errors401RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(auth)/sign-up': {
+      id: '/(auth)/sign-up'
+      path: '/sign-up'
+      fullPath: '/sign-up'
+      preLoaderRoute: typeof authSignUpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(auth)/sign-in-2': {
+      id: '/(auth)/sign-in-2'
+      path: '/sign-in-2'
+      fullPath: '/sign-in-2'
+      preLoaderRoute: typeof authSignIn2RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(auth)/sign-in': {
+      id: '/(auth)/sign-in'
+      path: '/sign-in'
+      fullPath: '/sign-in'
+      preLoaderRoute: typeof authSignInRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(auth)/otp': {
+      id: '/(auth)/otp'
+      path: '/otp'
+      fullPath: '/otp'
+      preLoaderRoute: typeof authOtpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(auth)/forgot-password': {
+      id: '/(auth)/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof authForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clerk/_authenticated': {
+      id: '/clerk/_authenticated'
+      path: ''
+      fullPath: '/clerk'
+      preLoaderRoute: typeof ClerkAuthenticatedRouteRouteImport
+      parentRoute: typeof ClerkRouteRoute
+    }
+    '/clerk/(auth)': {
+      id: '/clerk/(auth)'
+      path: '/'
+      fullPath: '/clerk/'
+      preLoaderRoute: typeof ClerkauthRouteRouteImport
+      parentRoute: typeof ClerkRouteRoute
+    }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/wealth-ifa/': {
+      id: '/_authenticated/wealth-ifa/'
+      path: '/wealth-ifa'
+      fullPath: '/wealth-ifa'
+      preLoaderRoute: typeof AuthenticatedWealthIfaIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/users/': {
+      id: '/_authenticated/users/'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof AuthenticatedUsersIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/upi_analytics/': {
+      id: '/_authenticated/upi_analytics/'
+      path: '/upi_analytics'
+      fullPath: '/upi_analytics'
+      preLoaderRoute: typeof AuthenticatedUpi_analyticsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/upi/': {
+      id: '/_authenticated/upi/'
+      path: '/upi'
+      fullPath: '/upi'
+      preLoaderRoute: typeof AuthenticatedUpiIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/tasks/': {
+      id: '/_authenticated/tasks/'
+      path: '/tasks'
+      fullPath: '/tasks'
+      preLoaderRoute: typeof AuthenticatedTasksIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/settings/': {
+      id: '/_authenticated/settings/'
+      path: '/'
+      fullPath: '/settings/'
+      preLoaderRoute: typeof AuthenticatedSettingsIndexRouteImport
+      parentRoute: typeof AuthenticatedSettingsRouteRoute
+    }
+    '/_authenticated/help-center/': {
+      id: '/_authenticated/help-center/'
+      path: '/help-center'
+      fullPath: '/help-center'
+      preLoaderRoute: typeof AuthenticatedHelpCenterIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/customers/': {
+      id: '/_authenticated/customers/'
+      path: '/customers'
+      fullPath: '/customers'
+      preLoaderRoute: typeof AuthenticatedCustomersIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/credit-repair/': {
+      id: '/_authenticated/credit-repair/'
+      path: '/credit-repair'
+      fullPath: '/credit-repair'
+      preLoaderRoute: typeof AuthenticatedCreditRepairIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/chats/': {
+      id: '/_authenticated/chats/'
+      path: '/chats'
+      fullPath: '/chats'
+      preLoaderRoute: typeof AuthenticatedChatsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/bureau/': {
+      id: '/_authenticated/bureau/'
+      path: '/bureau'
+      fullPath: '/bureau'
+      preLoaderRoute: typeof AuthenticatedBureauIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/bureau-consent/': {
+      id: '/_authenticated/bureau-consent/'
+      path: '/bureau-consent'
+      fullPath: '/bureau-consent'
+      preLoaderRoute: typeof AuthenticatedBureauConsentIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/bbps/': {
+      id: '/_authenticated/bbps/'
+      path: '/bbps'
+      fullPath: '/bbps'
+      preLoaderRoute: typeof AuthenticatedBbpsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/bbps-fileupload/': {
+      id: '/_authenticated/bbps-fileupload/'
+      path: '/bbps-fileupload'
+      fullPath: '/bbps-fileupload'
+      preLoaderRoute: typeof AuthenticatedBbpsFileuploadIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/apps/': {
+      id: '/_authenticated/apps/'
+      path: '/apps'
+      fullPath: '/apps'
+      preLoaderRoute: typeof AuthenticatedAppsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/clerk/_authenticated/user-management': {
+      id: '/clerk/_authenticated/user-management'
+      path: '/user-management'
+      fullPath: '/clerk/user-management'
+      preLoaderRoute: typeof ClerkAuthenticatedUserManagementRouteImport
+      parentRoute: typeof ClerkAuthenticatedRouteRoute
+    }
+    '/clerk/(auth)/sign-up': {
+      id: '/clerk/(auth)/sign-up'
+      path: '/sign-up'
+      fullPath: '/clerk/sign-up'
+      preLoaderRoute: typeof ClerkauthSignUpRouteImport
+      parentRoute: typeof ClerkauthRouteRoute
+    }
+    '/clerk/(auth)/sign-in': {
+      id: '/clerk/(auth)/sign-in'
+      path: '/sign-in'
+      fullPath: '/clerk/sign-in'
+      preLoaderRoute: typeof ClerkauthSignInRouteImport
+      parentRoute: typeof ClerkauthRouteRoute
+    }
+    '/_authenticated/settings/notifications': {
+      id: '/_authenticated/settings/notifications'
+      path: '/notifications'
+      fullPath: '/settings/notifications'
+      preLoaderRoute: typeof AuthenticatedSettingsNotificationsRouteImport
+      parentRoute: typeof AuthenticatedSettingsRouteRoute
+    }
+    '/_authenticated/settings/display': {
+      id: '/_authenticated/settings/display'
+      path: '/display'
+      fullPath: '/settings/display'
+      preLoaderRoute: typeof AuthenticatedSettingsDisplayRouteImport
+      parentRoute: typeof AuthenticatedSettingsRouteRoute
+    }
+    '/_authenticated/settings/appearance': {
+      id: '/_authenticated/settings/appearance'
+      path: '/appearance'
+      fullPath: '/settings/appearance'
+      preLoaderRoute: typeof AuthenticatedSettingsAppearanceRouteImport
+      parentRoute: typeof AuthenticatedSettingsRouteRoute
+    }
+    '/_authenticated/settings/account': {
+      id: '/_authenticated/settings/account'
+      path: '/account'
+      fullPath: '/settings/account'
+      preLoaderRoute: typeof AuthenticatedSettingsAccountRouteImport
+      parentRoute: typeof AuthenticatedSettingsRouteRoute
+    }
+  }
+}
+
+interface AuthenticatedSettingsRouteRouteChildren {
+  AuthenticatedSettingsAccountRoute: typeof AuthenticatedSettingsAccountRoute
+  AuthenticatedSettingsAppearanceRoute: typeof AuthenticatedSettingsAppearanceRoute
+  AuthenticatedSettingsDisplayRoute: typeof AuthenticatedSettingsDisplayRoute
+  AuthenticatedSettingsNotificationsRoute: typeof AuthenticatedSettingsNotificationsRoute
+  AuthenticatedSettingsIndexRoute: typeof AuthenticatedSettingsIndexRoute
+}
+
+const AuthenticatedSettingsRouteRouteChildren: AuthenticatedSettingsRouteRouteChildren =
+  {
+    AuthenticatedSettingsAccountRoute: AuthenticatedSettingsAccountRoute,
+    AuthenticatedSettingsAppearanceRoute: AuthenticatedSettingsAppearanceRoute,
+    AuthenticatedSettingsDisplayRoute: AuthenticatedSettingsDisplayRoute,
+    AuthenticatedSettingsNotificationsRoute:
+      AuthenticatedSettingsNotificationsRoute,
+    AuthenticatedSettingsIndexRoute: AuthenticatedSettingsIndexRoute,
+  }
+
+const AuthenticatedSettingsRouteRouteWithChildren =
+  AuthenticatedSettingsRouteRoute._addFileChildren(
+    AuthenticatedSettingsRouteRouteChildren,
+  )
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedSettingsRouteRoute: typeof AuthenticatedSettingsRouteRouteWithChildren
+  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+  AuthenticatedAppsIndexRoute: typeof AuthenticatedAppsIndexRoute
+  AuthenticatedBbpsFileuploadIndexRoute: typeof AuthenticatedBbpsFileuploadIndexRoute
+  AuthenticatedBbpsIndexRoute: typeof AuthenticatedBbpsIndexRoute
+  AuthenticatedBureauConsentIndexRoute: typeof AuthenticatedBureauConsentIndexRoute
+  AuthenticatedBureauIndexRoute: typeof AuthenticatedBureauIndexRoute
+  AuthenticatedChatsIndexRoute: typeof AuthenticatedChatsIndexRoute
+  AuthenticatedCreditRepairIndexRoute: typeof AuthenticatedCreditRepairIndexRoute
+  AuthenticatedCustomersIndexRoute: typeof AuthenticatedCustomersIndexRoute
+  AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
+  AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
+  AuthenticatedUpiIndexRoute: typeof AuthenticatedUpiIndexRoute
+  AuthenticatedUpi_analyticsIndexRoute: typeof AuthenticatedUpi_analyticsIndexRoute
+  AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
+  AuthenticatedWealthIfaIndexRoute: typeof AuthenticatedWealthIfaIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedSettingsRouteRoute: AuthenticatedSettingsRouteRouteWithChildren,
+  AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+  AuthenticatedAppsIndexRoute: AuthenticatedAppsIndexRoute,
+  AuthenticatedBbpsFileuploadIndexRoute: AuthenticatedBbpsFileuploadIndexRoute,
+  AuthenticatedBbpsIndexRoute: AuthenticatedBbpsIndexRoute,
+  AuthenticatedBureauConsentIndexRoute: AuthenticatedBureauConsentIndexRoute,
+  AuthenticatedBureauIndexRoute: AuthenticatedBureauIndexRoute,
+  AuthenticatedChatsIndexRoute: AuthenticatedChatsIndexRoute,
+  AuthenticatedCreditRepairIndexRoute: AuthenticatedCreditRepairIndexRoute,
+  AuthenticatedCustomersIndexRoute: AuthenticatedCustomersIndexRoute,
+  AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
+  AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
+  AuthenticatedUpiIndexRoute: AuthenticatedUpiIndexRoute,
+  AuthenticatedUpi_analyticsIndexRoute: AuthenticatedUpi_analyticsIndexRoute,
+  AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
+  AuthenticatedWealthIfaIndexRoute: AuthenticatedWealthIfaIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
+interface ClerkauthRouteRouteChildren {
+  ClerkauthSignInRoute: typeof ClerkauthSignInRoute
+  ClerkauthSignUpRoute: typeof ClerkauthSignUpRoute
+}
+
+const ClerkauthRouteRouteChildren: ClerkauthRouteRouteChildren = {
+  ClerkauthSignInRoute: ClerkauthSignInRoute,
+  ClerkauthSignUpRoute: ClerkauthSignUpRoute,
+}
+
+const ClerkauthRouteRouteWithChildren = ClerkauthRouteRoute._addFileChildren(
+  ClerkauthRouteRouteChildren,
+)
+
+interface ClerkAuthenticatedRouteRouteChildren {
+  ClerkAuthenticatedUserManagementRoute: typeof ClerkAuthenticatedUserManagementRoute
+}
+
+const ClerkAuthenticatedRouteRouteChildren: ClerkAuthenticatedRouteRouteChildren =
+  {
+    ClerkAuthenticatedUserManagementRoute:
+      ClerkAuthenticatedUserManagementRoute,
+  }
+
+const ClerkAuthenticatedRouteRouteWithChildren =
+  ClerkAuthenticatedRouteRoute._addFileChildren(
+    ClerkAuthenticatedRouteRouteChildren,
+  )
+
+interface ClerkRouteRouteChildren {
+  ClerkauthRouteRoute: typeof ClerkauthRouteRouteWithChildren
+  ClerkAuthenticatedRouteRoute: typeof ClerkAuthenticatedRouteRouteWithChildren
+}
+
+const ClerkRouteRouteChildren: ClerkRouteRouteChildren = {
+  ClerkauthRouteRoute: ClerkauthRouteRouteWithChildren,
+  ClerkAuthenticatedRouteRoute: ClerkAuthenticatedRouteRouteWithChildren,
+}
+
+const ClerkRouteRouteWithChildren = ClerkRouteRoute._addFileChildren(
+  ClerkRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   ClerkRouteRoute: ClerkRouteRouteWithChildren,
@@ -942,207 +890,6 @@ const rootRouteChildren: RootRouteChildren = {
   errors500Route: errors500Route,
   errors503Route: errors503Route,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/_authenticated",
-        "/clerk",
-        "/(auth)/forgot-password",
-        "/(auth)/otp",
-        "/(auth)/sign-in",
-        "/(auth)/sign-in-2",
-        "/(auth)/sign-up",
-        "/(errors)/401",
-        "/(errors)/403",
-        "/(errors)/404",
-        "/(errors)/500",
-        "/(errors)/503"
-      ]
-    },
-    "/_authenticated": {
-      "filePath": "_authenticated/route.tsx",
-      "children": [
-        "/_authenticated/settings",
-        "/_authenticated/",
-        "/_authenticated/apps/",
-        "/_authenticated/bbps-fileupload/",
-        "/_authenticated/bbps/",
-        "/_authenticated/bureau-consent/",
-        "/_authenticated/bureau/",
-        "/_authenticated/chats/",
-        "/_authenticated/credit-repair/",
-        "/_authenticated/customers/",
-        "/_authenticated/help-center/",
-        "/_authenticated/tasks/",
-        "/_authenticated/upi/",
-        "/_authenticated/upi_analytics/",
-        "/_authenticated/users/",
-        "/_authenticated/wealth-ifa/"
-      ]
-    },
-    "/clerk": {
-      "filePath": "clerk/route.tsx",
-      "children": [
-        "/clerk/(auth)",
-        "/clerk/_authenticated"
-      ]
-    },
-    "/_authenticated/settings": {
-      "filePath": "_authenticated/settings/route.tsx",
-      "parent": "/_authenticated",
-      "children": [
-        "/_authenticated/settings/account",
-        "/_authenticated/settings/appearance",
-        "/_authenticated/settings/display",
-        "/_authenticated/settings/notifications",
-        "/_authenticated/settings/"
-      ]
-    },
-    "/clerk/(auth)": {
-      "filePath": "clerk/(auth)/route.tsx",
-      "parent": "/clerk",
-      "children": [
-        "/clerk/(auth)/sign-in",
-        "/clerk/(auth)/sign-up"
-      ]
-    },
-    "/clerk/_authenticated": {
-      "filePath": "clerk/_authenticated/route.tsx",
-      "parent": "/clerk",
-      "children": [
-        "/clerk/_authenticated/user-management"
-      ]
-    },
-    "/(auth)/forgot-password": {
-      "filePath": "(auth)/forgot-password.tsx"
-    },
-    "/(auth)/otp": {
-      "filePath": "(auth)/otp.tsx"
-    },
-    "/(auth)/sign-in": {
-      "filePath": "(auth)/sign-in.tsx"
-    },
-    "/(auth)/sign-in-2": {
-      "filePath": "(auth)/sign-in-2.tsx"
-    },
-    "/(auth)/sign-up": {
-      "filePath": "(auth)/sign-up.tsx"
-    },
-    "/(errors)/401": {
-      "filePath": "(errors)/401.tsx"
-    },
-    "/(errors)/403": {
-      "filePath": "(errors)/403.tsx"
-    },
-    "/(errors)/404": {
-      "filePath": "(errors)/404.tsx"
-    },
-    "/(errors)/500": {
-      "filePath": "(errors)/500.tsx"
-    },
-    "/(errors)/503": {
-      "filePath": "(errors)/503.tsx"
-    },
-    "/_authenticated/": {
-      "filePath": "_authenticated/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/settings/account": {
-      "filePath": "_authenticated/settings/account.tsx",
-      "parent": "/_authenticated/settings"
-    },
-    "/_authenticated/settings/appearance": {
-      "filePath": "_authenticated/settings/appearance.tsx",
-      "parent": "/_authenticated/settings"
-    },
-    "/_authenticated/settings/display": {
-      "filePath": "_authenticated/settings/display.tsx",
-      "parent": "/_authenticated/settings"
-    },
-    "/_authenticated/settings/notifications": {
-      "filePath": "_authenticated/settings/notifications.tsx",
-      "parent": "/_authenticated/settings"
-    },
-    "/clerk/(auth)/sign-in": {
-      "filePath": "clerk/(auth)/sign-in.tsx",
-      "parent": "/clerk/(auth)"
-    },
-    "/clerk/(auth)/sign-up": {
-      "filePath": "clerk/(auth)/sign-up.tsx",
-      "parent": "/clerk/(auth)"
-    },
-    "/clerk/_authenticated/user-management": {
-      "filePath": "clerk/_authenticated/user-management.tsx",
-      "parent": "/clerk/_authenticated"
-    },
-    "/_authenticated/apps/": {
-      "filePath": "_authenticated/apps/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/bbps-fileupload/": {
-      "filePath": "_authenticated/bbps-fileupload/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/bbps/": {
-      "filePath": "_authenticated/bbps/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/bureau-consent/": {
-      "filePath": "_authenticated/bureau-consent/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/bureau/": {
-      "filePath": "_authenticated/bureau/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/chats/": {
-      "filePath": "_authenticated/chats/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/credit-repair/": {
-      "filePath": "_authenticated/credit-repair/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/customers/": {
-      "filePath": "_authenticated/customers/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/help-center/": {
-      "filePath": "_authenticated/help-center/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/settings/": {
-      "filePath": "_authenticated/settings/index.tsx",
-      "parent": "/_authenticated/settings"
-    },
-    "/_authenticated/tasks/": {
-      "filePath": "_authenticated/tasks/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/upi/": {
-      "filePath": "_authenticated/upi/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/upi_analytics/": {
-      "filePath": "_authenticated/upi_analytics/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/users/": {
-      "filePath": "_authenticated/users/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/wealth-ifa/": {
-      "filePath": "_authenticated/wealth-ifa/index.tsx",
-      "parent": "/_authenticated"
-    }
-  }
-}
-ROUTE_MANIFEST_END */
