@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { Download } from 'lucide-react';
 import logo from '../../../assets/logo.png';
+import printLogo from '../../../assets/print-logo.png';
 
 export interface TransactionReceiptProps {
   transactionData: {
@@ -201,16 +202,33 @@ export default function TransactionReceipt({ transactionData }: TransactionRecei
           className="bg-white rounded-lg shadow-lg p-8 print:shadow-none print:rounded-none"
         >
           {/* Company Header */}
-          <div className="text-center mb-6 pb-4 border-b-2 border-gray-300">
+          <div className="text-center mb-6 pb-4 border-b-2 border-gray-300 relative">
+            <style>{`
+              .top-right-print-logo { display: none; }
+              @media print {
+                .top-right-print-logo {
+                  display: block;
+                  position: absolute;
+                  top: 16px;
+                  right: 16px;
+                  width: 120px;
+                  height: auto;
+                }
+              }
+            `}</style>
+
             <div className="flex items-center justify-center gap-3 mb-2">
               <img
                 src={logo}
-                alt="Stashfin Logo" 
-                width={150} 
-                height={50} 
+                alt="Stashfin Logo"
+                width={150}
+                height={50}
                 className="rounded-md"
-                />
+              />
             </div>
+
+            {/* Print-only top-right logo */}
+            <img src={printLogo} alt="Stashfin Logo" className="top-right-print-logo" />
           </div>
 
           {/* Receipt Details */}
