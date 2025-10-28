@@ -27,6 +27,9 @@ export interface TransactionReceiptProps {
 
 export default function TransactionReceipt({ transactionData }: TransactionReceiptProps) {
   const receiptRef = useRef<HTMLDivElement>(null);
+  
+  // Debug: Check what data we're receiving
+  console.log('Transaction Data:', transactionData);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
