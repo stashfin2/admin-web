@@ -142,8 +142,11 @@ export const bbpsColumns: ColumnDef<Transaction>[] = [
               withCredentials: true,
             }
           );
-          // Pass backend response directly to TransactionReceipt
-          setTransactionData(response.data);
+          // Pass backend response with order_id from the row
+          setTransactionData({
+            ...response.data,
+            order_id: row.original.order_id
+          });
           setOpen(true);
         } catch (err) {
           setError('Failed to fetch transaction details');
