@@ -7,6 +7,7 @@ export interface TransactionReceiptProps {
   transactionData: {
     customer_id: number;
     transaction_id: number;
+    order_id?: string;
     mobile: string;
     bbps_ref_no: string;
     category: string;
@@ -77,7 +78,7 @@ export default function TransactionReceipt({ transactionData }: TransactionRecei
         <!DOCTYPE html>
         <html>
         <head>
-          <title>Order Receipt - ${transactionData.transaction_id}</title>
+          <title>Order Receipt - ${transactionData.order_id || transactionData.transaction_id}</title>
           <meta charset="utf-8">
           <style>
             ${stylesheets}
@@ -238,7 +239,7 @@ export default function TransactionReceipt({ transactionData }: TransactionRecei
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <p className="text-sm text-gray-600">Order Id</p>
-                  <p className="font-semibold text-gray-800">{transactionData.transaction_id}</p>
+                  <p className="font-semibold text-gray-800">{transactionData.order_id || transactionData.transaction_id}</p>
                 </div>
                 <div>
                   <p className="text-sm text-gray-600">Receipt Date</p>
