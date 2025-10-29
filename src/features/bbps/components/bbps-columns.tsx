@@ -157,7 +157,7 @@ export const bbpsColumns: ColumnDef<Transaction>[] = [
 
       return (
         <>
-          {row.original.paymentStatus === 'success' && (
+          {(row.original.billerStatus?.toUpperCase() === 'SUCCESS') && (
             <button
               className="px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700"
               onClick={handleDownloadClick}
