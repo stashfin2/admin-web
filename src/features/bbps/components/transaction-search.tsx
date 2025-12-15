@@ -285,8 +285,8 @@ export function TransactionSearch({
             <SelectContent>
               <SelectItem value='initiated'>Initiated</SelectItem>
               <SelectItem value='success'>Success</SelectItem>
-              <SelectItem value='payment_processing_error'>
-                Payment Processing Error
+              <SelectItem value='failed'>
+                Failed
               </SelectItem>
             </SelectContent>
           </Select>
