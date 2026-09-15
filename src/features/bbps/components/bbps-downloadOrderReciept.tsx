@@ -243,7 +243,7 @@ export default function TransactionReceipt({ transactionData }: TransactionRecei
                 </div>
                 <div>
                   <p className="text-sm text-gray-600">Receipt Date</p>
-                  <p className="font-semibold text-gray-800">{formatDate(transactionData.updated_at)}</p>
+                  <p className="font-semibold text-gray-800">{formatDate(transactionData.created_at)}</p>
                 </div>
               </div>
             </div>
